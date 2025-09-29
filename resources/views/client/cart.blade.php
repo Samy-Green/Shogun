@@ -1,115 +1,236 @@
-<!DOCTYPE html>
-<html lang="zxx" class="no-js">
 
-<head>
-    <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/fav.png">
-    <!-- Author Meta -->
-    <meta name="author" content="CodePixar">
-    <!-- Meta Description -->
-    <meta name="description" content="">
-    <!-- Meta Keyword -->
-    <meta name="keywords" content="">
-    <!-- meta character set -->
-    <meta charset="UTF-8">
-    <!-- Site Title -->
-    <title>Karma Shop</title>
+@extends('client/layouts/layoutMaster')
 
-    <!--
-            CSS
-            ============================================= -->
-    <link rel="stylesheet" href="css/linearicons.css">
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/nouislider.min.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/main.css">
-</head>
+@section('title', 'Panier')
 
-<body>
+@section('page-styles')
+    		<!-- Place your custom styles here -->
+	@vite([
+        'resources/assets/client/css/linearicons.css',
+        'resources/assets/client/css/font-awesome.min.css',
+        'resources/assets/client/css/themify-icons.css',
+        'resources/assets/client/css/owl.carousel.css',
+        'resources/assets/client/css/nice-select.css',
+        'resources/assets/client/css/nouislider.min.css',
+		'resources/assets/client/css/bootstrap.css',
+        'resources/assets/client/css/main.css',
+    ])
+@endsection
 
-    <!-- Start Header Area -->
-	<header class="header_area sticky-header">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light main_box">
-				<div class="container">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-							<li class="nav-item submenu dropdown active">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Shop</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
-									<li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-									<li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-									<li class="nav-item active"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-									<li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-								</ul>
-							</li>
-							<li class="nav-item submenu dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Blog</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-									<li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-								</ul>
-							</li>
-							<li class="nav-item submenu dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Pages</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-									<li class="nav-item"><a class="nav-link" href="tracking.html">Tracking</a></li>
-									<li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
-								</ul>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
-							<li class="nav-item">
-								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-		<div class="search_input" id="search_input_box">
-			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
-					<button type="submit" class="btn"></button>
-					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-				</form>
-			</div>
-		</div>
-	</header>
-	<!-- End Header Area -->
+@section("page-scripts")
+    	<!-- Place your custom scripts here -->
+	@vite([
+			'resources/assets/client/js/vendor/jquery-2.2.4.min.js',
+			'resources/assets/client/js/vendor/bootstrap.min.js',
+			'resources/assets/client/js/jquery.ajaxchimp.min.js',
+			'resources/assets/client/js/jquery.nice-select.min.js',
+			'resources/assets/client/js/jquery.sticky.js',
+			'resources/assets/client/js/nouislider.min.js',
+			'resources/assets/client/js/jquery.magnific-popup.min.js',
+			'resources/assets/client/js/owl.carousel.min.js',
+			'resources/assets/client/js/gmaps.min.js',
+			'resources/assets/client/js/main.js',
+	])
 
+	{{-- External scripts (non compilés avec Vite) --}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+			integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+			crossorigin="anonymous"></script>
+
+	<!-- Google Maps API -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+
+    <script>
+        document.getElementById('citySearch').addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const items = document.querySelectorAll('#cityList .city-dropdown-item');
+            
+            // alert(items[0]);
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(filter) ? 'block' : 'none';
+            });
+        });
+
+        document.querySelector('#citySearch').addEventListener("blur", function() {
+            const checkedRadio = document.querySelector('input[name="city"]:checked');
+            if (checkedRadio) {
+                this.value = checkedRadio.parentElement.textContent.trim(); // affiche le nom dans l’input
+            }
+        });
+
+
+        document.querySelectorAll('.city-radio').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const city = JSON.parse(this.getAttribute('data-city'));
+                document.getElementById('citySearch').value = city.name;
+                const neighborhoodSelect = document.querySelector('.neighborhood-dropdown');
+                document.querySelectorAll('.exp-li').forEach(li => li.classList.remove('active'));
+                document.querySelector('#neighborhoodSearch').value = '';
+                if (city.delivery !== 'home') {
+                    neighborhoodSelect.style.display = 'none';
+                    document.querySelector('#expedition_delivery').classList.add('active');
+                    document.getElementById('no_delivery').checked = false;
+                    document.querySelector('#expedition_delivery span').innerText = city.cost + ' FCFA';
+                    return;
+                } else {
+                    const neighborhoods = JSON.parse(this.getAttribute('data-neighborhoods'));
+                    console.log('neighborhoods');
+                    
+                    if (!neighborhoods || neighborhoods.length === 0) {
+                        neighborhoodSelect.style.display = 'none';
+                        return;
+                    };
+                    
+                    const neighborhoodList = document.getElementById('neighborhoodList');                
+                    // Clear existing options
+                    neighborhoodList.innerHTML = '';
+
+                    // Populate new options
+                    neighborhoods.forEach(neighborhood => {
+                        const option = `<label class="neighborhood-dropdown-item">
+                            <input type="radio" class="neighborhood-radio" form="cart-form" name="neighborhood" value="${ neighborhood.id }" data-neighborhood='${ JSON.stringify(neighborhood) }'>
+                            ${ neighborhood.name }
+                            </label> `;
+                            neighborhoodList.innerHTML += option;
+                        });
+                    neighborhoodSelect.style.display = 'block';
+
+
+                    document.querySelectorAll('.neighborhood-radio').forEach(radio => {
+                        radio.addEventListener('change', function() {
+                            document.querySelectorAll('.exp-li').forEach(li => li.classList.remove('active'));
+                            document.querySelector('#local_delivery').classList.add('active');
+                            document.getElementById('no_delivery').checked = false;
+                            document.querySelector('#local_delivery span').innerText = city.cost + ' FCFA';
+                            const neighborhood = JSON.parse(this.getAttribute('data-neighborhood'));
+                            document.getElementById('neighborhoodSearch').value = neighborhood.name;
+                        });
+                    });
+                }
+            });
+        });
+
+        document.querySelector('#neighborhoodSearch').addEventListener("blur", function() {
+            const checkedRadio = document.querySelector('input[name="neighborhood"]:checked');
+            if (checkedRadio) {
+                this.value = checkedRadio.parentElement.textContent.trim(); // affiche le nom dans l’input
+            }
+        });
+
+        document.getElementById('no_delivery').addEventListener('change', function() {
+            if (this.checked) {
+                document.querySelectorAll('.exp-li').forEach(li => li.classList.remove('active'));
+                document.querySelector('#on_site_delivery').classList.add('active');
+                document.querySelector('#citySearch').value = '';
+                document.querySelector('#neighborhoodSearch').value = '';
+                document.querySelector('.neighborhood-dropdown').style.display = 'none';
+
+                document.querySelector('input[name="city"]:checked').checked = false;
+            }
+            else{
+                document.querySelector('#on_site_delivery').classList.remove('active');
+            }
+        });
+
+    </script>
+
+@endsection
+
+@section('page-content')
+<style>
+    .city-dropdown, .neighborhood-dropdown {
+        position: relative;
+        max-height: 300px;
+    }
+    
+    
+    .city-dropdown-list, .neighborhood-dropdown-list {
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        display: none;
+        background-color: #fff;
+        text-align: left;
+        justify-content: start;
+    }
+
+    .city-dropdown:hover .city-dropdown-list, .neighborhood-dropdown:hover .neighborhood-dropdown-list {
+        display: block;
+        z-index: 1;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+    }
+
+    .city-dropdown:hover .city-dropdown-list, .city-dropdown-input:focus + .city-dropdown-list,
+    .neighborhood-dropdown:hover .neighborhood-dropdown-list, .neighborhood-dropdown-input:focus + .neighborhood-dropdown-list {
+        display: block;
+        z-index: 1000;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+    }
+
+    .city-dropdown-item,.neighborhood-dropdown-item {
+        display: block;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+
+    .city-dropdown-item:hover, .neighborhood-dropdown-item:hover {
+        background-color: #f0f0f0;
+    }
+
+    .city-radio,.neighborhood-radio {
+        margin-left: 20px; 
+        margin-right: 10px;
+        max-width: 20px;
+    }
+
+    .shipping_box input[type="checkbox"] {
+        margin-left: 20px; 
+        margin-right: 10px;
+        max-width: 15px;
+        margin-bottom: 0;
+
+    }
+
+    .no_delivery_box {
+        vertical-align: middle;
+        padding: 0;
+        cursor: pointer;
+    }
+    .no_delivery_box input[type="checkbox"] {
+        vertical-align: middle;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .city-dropdown-item *, .neighborhood-dropdown-item * {
+        vertical-align: middle;
+        padding: 0;
+    }
+
+    .cart_inner .table tbody tr.shipping_area .shipping_box input[type="radio"], .cart_inner .table tbody tr.shipping_area .shipping_box input[type="checkbox"]{
+        margin-bottom: 0;
+    }
+
+    .btn{
+        outline: none;
+    }
+
+</style>
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Shopping Cart</h1>
+                    <h1>Pannier</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Cart</a>
+                        <a href="{{ route('site.index') }}">Accueil<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('site.cart') }}">Pannier</a>
                     </nav>
                 </div>
             </div>
@@ -117,7 +238,7 @@
     </section>
     <!-- End Banner Area -->
 
-    <!--================Cart Area =================-->
+    <!--==========Cart Area =================-->
     <section class="cart_area">
         <div class="container">
             <div class="cart_inner">
@@ -125,178 +246,132 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
+                                <th scope="col">Produit</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Quantité</th>
                                 <th scope="col">Total</th>
                             </tr>
                         </thead>
+                        @php
+                            $sumTotal = 0;
+                        @endphp
                         <tbody>
+                            @foreach ($products as $product)
+                            @php
+                                $productPrice = $product["price"];
+                                $miTotal = $productPrice * $product["quantity"];
+                                $sumTotal += $miTotal;
+                            @endphp
                             <tr>
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                            <img src="img/cart.jpg" alt="">
+                                            <img style="max-width: 60px" src="{{ asset($product["image"]) }}" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <p>Minimalistic shop for multipurpose use</p>
+                                            <p>{{ $product["name"] }}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$360.00</h5>
+                                    <h5>{{ $productPrice }} FCFA</h5>
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                            class="input-text qty">
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                        <input type="text" form="cart-form" name="products[{{ $product["id"] }}]" id="sst{{ $product["id"] }}" maxlength="12" value="{{ $product["quantity"] }}" title="Quantité"
+                                        class="input-text qty">
+                                        <button onclick="var result = document.getElementById('sst{{ $product['id'] }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                        class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                        <button onclick="var result = document.getElementById('sst{{ $product['id'] }}'); var sst = result.value; if( !isNaN( sst ) && sst > 0 ) result.value--;return false;"
                                             class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$720.00</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/cart.jpg" alt="">
                                         </div>
-                                        <div class="media-body">
-                                            <p>Minimalistic shop for multipurpose use</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$360.00</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                            class="input-text qty">
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$720.00</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/cart.jpg" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>Minimalistic shop for multipurpose use</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$360.00</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                            class="input-text qty">
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$720.00</h5>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                        <h5>{{ number_format($miTotal, 0, ",", ".") }} FCFA</h5>
+                                    </td>
+                                </tr>
+                            @endforeach
                             <tr class="bottom_button">
                                 <td>
-                                    <a class="gray_btn" href="#">Update Cart</a>
+                                    <button form="cart-form" name="maj" value="maj" type="submit" class="btn gray_btn">Mettre à jour le panier</button>
                                 </td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
+                                <td></td>
+                                <td></td>
                                 <td>
                                     <div class="cupon_text d-flex align-items-center">
-                                        <input type="text" placeholder="Coupon Code">
-                                        <a class="primary-btn" href="#">Apply</a>
-                                        <a class="gray_btn" href="#">Close Coupon</a>
+                                        <input type="text" placeholder="Code promo">
+                                        <button class="btn primary-btn">Appliquer</button>
+                                        <button class="btn gray_btn">Fermer</button>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
+                                <td></td>
+                                <td></td>
                                 <td>
-
+                                    <h5>Sous-total</h5>
                                 </td>
                                 <td>
-
-                                </td>
-                                <td>
-                                    <h5>Subtotal</h5>
-                                </td>
-                                <td>
-                                    <h5>$2160.00</h5>
+                                    <h5>{{ number_format($sumTotal, 0, ",", ".") }} FCFA</h5>
                                 </td>
                             </tr>
                             <tr class="shipping_area">
+                                <td></td>
+                                <td></td>
                                 <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <h5>Shipping</h5>
+                                    <h5>Livraison</h5>
                                 </td>
                                 <td>
                                     <div class="shipping_box">
                                         <ul class="list">
-                                            <li><a href="#">Flat Rate: $5.00</a></li>
-                                            <li><a href="#">Free Shipping</a></li>
-                                            <li><a href="#">Flat Rate: $10.00</a></li>
-                                            <li class="active"><a href="#">Local Delivery: $2.00</a></li>
+                                            <li class="exp-li" id="local_delivery"><a href="javascript:void(0);">Livraison locale : <span>1000 FCFA</span></a></li>
+                                            <li class="exp-li" id="expedition_delivery"><a href="javascript:void(0);">Expédition : <span>2500 FCFA</span></a></li>
+                                            <li class="exp-li" id="free_delivery"><a href="javascript:void(0);">Livraison gratuite</a></li>
+                                            <li class="exp-li active" id="on_site_delivery"><a href="javascript:void(0);">Sur place (Maetur Nkomo)</a></li>
                                         </ul>
-                                        <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
-                                        <select class="shipping_select">
-                                            <option value="1">Bangladesh</option>
-                                            <option value="2">India</option>
-                                            <option value="4">Pakistan</option>
+                                        <h6>Calculer la livraison <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
+                                        <label class="no_delivery_box" for="no_delivery">
+                                            <input type="checkbox" form="cart-form" name="no_delivery" id="no_delivery" value="1" checked>Récupérer sur place ? &nbsp;&nbsp;
+                                        </label>
+                                        <div class="city-dropdown">
+                                            <input type="text" id="citySearch" placeholder="Rechercher une ville..." class="city-dropdown-input form-control mb-2">
+                                            <div id="cityList" class="city-dropdown-list">
+                                                @foreach($cities as $city)
+                                                <label class="city-dropdown-item">
+                                                    <input type="radio" form="cart-form" class="city-radio" name="city" value="{{ $city->id }}" data-neighborhoods='{{ json_encode($city->neighborhoods) }}' data-city='{{ json_encode($city) }}'>
+                                                    {{ $city->name }}
+                                                </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div class="neighborhood-dropdown" style="display: none;">
+                                            <input type="text" id="neighborhoodSearch" placeholder="Rechercher un quartier..." class="neighborhood-dropdown-input form-control mb-2">
+                                            <div id="neighborhoodList" class="neighborhood-dropdown-list">
+                                                {{-- Options de quartier seront ajoutées ici dynamiquement --}}
+                                            </div>
+                                        </div>
+                                        {{-- <select class="shipping_select">
+                                            <option value="">Sélectionner un quartier</option>
+                                            <option value="2">Sélectionner un État</option>
+                                            <option value="4">Sélectionner un État</option>
                                         </select>
-                                        <select class="shipping_select">
-                                            <option value="1">Select a State</option>
-                                            <option value="2">Select a State</option>
-                                            <option value="4">Select a State</option>
-                                        </select>
-                                        <input type="text" placeholder="Postcode/Zipcode">
-                                        <a class="gray_btn" href="#">Update Details</a>
+                                        <input type="text" placeholder="Précisions">
+                                        <a class="gray_btn" href="#">Mettre à jour</a> --}}
                                     </div>
                                 </td>
                             </tr>
                             <tr class="out_button_area">
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td>
                                     <div class="checkout_btn_inner d-flex align-items-center">
-                                        <a class="gray_btn" href="#">Continue Shopping</a>
-                                        <a class="primary-btn" href="#">Proceed to checkout</a>
+                                        <a class="gray_btn" href="#">Continuer</a>
+                                        <button form="cart-form" name="send" value="send" type="submit" class="btn primary-btn">Valider</button>
                                     </div>
+                                    <form action="{{ route('site.send-or-maj') }}" method="post" id="cart-form">
+                                        @csrf
+                                    </form>
                                 </td>
                             </tr>
                         </tbody>
@@ -307,103 +382,4 @@
     </section>
     <!--================End Cart Area =================-->
 
-    <!-- start footer Area -->
-    <footer class="footer-area section_gap">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3  col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>About Us</h6>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore dolore
-                            magna aliqua.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-4  col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>Newsletter</h6>
-                        <p>Stay update with our latest</p>
-                        <div class="" id="mc_embed_signup">
-
-                            <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                method="get" class="form-inline">
-
-                                <div class="d-flex flex-row">
-
-                                    <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter Email '" required="" type="email">
-
-
-                                    <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right"
-                                            aria-hidden="true"></i></button>
-                                    <div style="position: absolute; left: -5000px;">
-                                        <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
-                                            type="text">
-                                    </div>
-
-                                    <!-- <div class="col-lg-4 col-md-4">
-													<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-												</div>  -->
-                                </div>
-                                <div class="info"></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3  col-md-6 col-sm-6">
-                    <div class="single-footer-widget mail-chimp">
-                        <h6 class="mb-20">Instragram Feed</h6>
-                        <ul class="instafeed d-flex flex-wrap">
-                            <li><img src="img/i1.jpg" alt=""></li>
-                            <li><img src="img/i2.jpg" alt=""></li>
-                            <li><img src="img/i3.jpg" alt=""></li>
-                            <li><img src="img/i4.jpg" alt=""></li>
-                            <li><img src="img/i5.jpg" alt=""></li>
-                            <li><img src="img/i6.jpg" alt=""></li>
-                            <li><img src="img/i7.jpg" alt=""></li>
-                            <li><img src="img/i8.jpg" alt=""></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>Follow Us</h6>
-                        <p>Let us be social</p>
-                        <div class="footer-social d-flex align-items-center">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-dribbble"></i></a>
-                            <a href="#"><i class="fa fa-behance"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-                <p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
-            </div>
-        </div>
-    </footer>
-    <!-- End footer Area -->
-
-    <script src="js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-	 crossorigin="anonymous"></script>
-	<script src="js/vendor/bootstrap.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/jquery.nice-select.min.js"></script>
-	<script src="js/jquery.sticky.js"></script>
-    <script src="js/nouislider.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<!--gmaps Js-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="js/gmaps.min.js"></script>
-	<script src="js/main.js"></script>
-</body>
-
-</html>
+@endsection

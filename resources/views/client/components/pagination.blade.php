@@ -3,13 +3,14 @@
     $last = $element->lastPage();
 @endphp
 <div class="filter-bar d-flex flex-wrap align-items-center">
-					<div class="sorting mr-auto">
-						<select>
-							<option value="1">Show 12</option>
-							<option value="1">Show 12</option>
-							<option value="1">Show 12</option>
-						</select>
-					</div>
+  <div class="sorting mr-auto">
+    {{-- <select>
+      <option value="6">Afficher 6</option>
+      <option value="9">Afficher 9</option>
+      <option value="12">Afficher 12</option>
+    </select> --}}
+    <p class="result-count" style="color: white">Affichage {{ $element->count() }} sur {{ $element->total() }} résultats</p>
+  </div>
   <div class="pagination">
     {{-- Lien précédent --}}
     @if ($element->onFirstPage())

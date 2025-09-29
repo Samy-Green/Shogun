@@ -21,26 +21,24 @@
           <ul class="nav navbar-nav menu_nav ml-auto">
             <li class="nav-item {{ request()->routeIs('site.index') ? 'active' : '' }}"><a class="nav-link" href="{{ route('site.index') }}">Accueil</a></li>
             <li class="nav-item {{ request()->routeIs('site.categories') ? 'active' : '' }}"><a class="nav-link" href="{{ route('site.categories') }}">Produits</a></li>
-            <li class="nav-item submenu dropdown">
+            {{-- <li class="nav-item submenu dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                  aria-expanded="false">Shop</a>
               <ul class="dropdown-menu">
-                <li class="nav-item"><a class="nav-link" href="{{ route('site.category') }}">Catégories</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('site.single-product') }}">Product Details</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('site.checkout') }}">Product Checkout</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('site.cart') }}">Shopping Cart</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('site.confirmation') }}">Confirmation</a></li>
               </ul>
-            </li>
-            <li class="nav-item submenu dropdown">
+            </li> --}}
+            {{-- <li class="nav-item submenu dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                  aria-expanded="false">Blog</a>
               <ul class="dropdown-menu">
                 <li class="nav-item"><a class="nav-link" href="{{ route('site.blog') }}">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('site.single-blog') }}">Blog Details</a></li>
               </ul>
-            </li>
-            <li class="nav-item submenu dropdown">
+            </li> --}}
+            {{-- <li class="nav-item submenu dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                  aria-expanded="false">Pages</a>
               <ul class="dropdown-menu">
@@ -48,11 +46,11 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('site.tracking') }}">Tracking</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('site.elements') }}">Elements</a></li>
               </ul>
-            </li>
+            </li> --}}
             <li class="nav-item"><a class="nav-link" href="{{ route('site.contact') }}">Contact</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
+            <li class="nav-item {{ request()->routeIs('site.cart') ? 'active' : '' }}"><a href="{{ route('site.cart') }}" class="cart" title="Voir le panier"><span class="ti-bag"></span></a></li>
             <li class="nav-item">
               <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
             </li>

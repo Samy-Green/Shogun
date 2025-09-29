@@ -7,6 +7,7 @@ use App\Http\Controllers\pages\Page2;
 use App\Http\Controllers\pages\MiscError;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
+use App\Http\Controllers\pages\CartController;
 use App\Http\Controllers\pages\SiteController;
 
 //Route::get('/site', [SiteController::class, 'index'])->name('sites-home');
@@ -17,7 +18,7 @@ Route::get('/site', [SiteController::class, 'index'])->name('site.index');
 // Shop
 Route::get('/site/categories', [SiteController::class, 'categories'])->name('site.categories');
 Route::get('/site/category', [SiteController::class, 'category'])->name('site.category');
-Route::get('/site/single-product', [SiteController::class, 'singleProduct'])->name('site.single-product');
+Route::get('/site/product/{product_id}', [SiteController::class, 'product'])->name('site.product');
 Route::get('/site/checkout', [SiteController::class, 'checkout'])->name('site.checkout');
 Route::get('/site/cart', [SiteController::class, 'cart'])->name('site.cart');
 Route::get('/site/confirmation', [SiteController::class, 'confirmation'])->name('site.confirmation');
@@ -34,7 +35,15 @@ Route::get('/site/elements', [SiteController::class, 'elements'])->name('site.el
 // Contact
 Route::get('/site/contact', [SiteController::class, 'contact'])->name('site.contact');
 
+Route::post('/site/send-or-maj', [SiteController::class, 'sendOrMaj'])->name('site.send-or-maj');
 
+Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 
 

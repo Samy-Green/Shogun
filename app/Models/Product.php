@@ -29,6 +29,7 @@ class Product extends Model
         'is_active',
         'is_coming',
         'purchase_price',
+        'long_description',
     ];
 
     // Catégorie principale
@@ -59,5 +60,11 @@ class Product extends Model
 
         return max($discount, $deal);
     }
+
+    public function files()
+    {
+        return $this->belongsToMany(\App\Models\File::class, 'product_file');
+    }
+
 
 }

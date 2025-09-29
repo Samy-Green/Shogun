@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		<div class="row">
 			<div class="col-xl-3 col-lg-4 col-md-5">
 				<div class="sidebar-categories">
-					<div class="head">Browse Categories</div>
+					<div class="head">Catégories</div>
 					<ul class="main-categories">
 						<li class="main-nav-list"><a href="?category=0">Toutes catégories<span class="number">({{ 20 }})</span></a></li>
 						@foreach ($categories as $category)
@@ -104,108 +104,99 @@ document.addEventListener("DOMContentLoaded", function() {
 								<li class="main-nav-list"><a data-toggle="collapse" href="#c{{ $category->id }}" aria-expanded="false" aria-controls="c{{ $category->id }}"><span
 								class="lnr lnr-arrow-right"></span>{{ $category->name }}<span class="number">({{ $category->count_children }})</span></a>
 									<ul class="collapse" id="c{{ $category->id }}" data-toggle="collapse" aria-expanded="false" aria-controls="c{{ $category->id }}">
-										<li class="main-nav-list child"><a href="?category={{$category->id}}">Tout<span class="number">({{ $category->count_products }})</span></a></li>
+										<li class="main-nav-list child"><a href="?category={{$category->id}}&{{ http_build_query($old_inputs) }}">Tout<span class="number">({{ $category->count_products }})</span></a></li>
 
 										@foreach ($subcategories as $subcategory)
-											<li class="main-nav-list child"><a href="?category={{ $subcategory->id }}">{{ $subcategory->name }}<span class="number">({{ $subcategory->count_products }})</span></a></li>
+											<li class="main-nav-list child"><a href="?category={{ $subcategory->id }}&{{ http_build_query($old_inputs) }}">{{ $subcategory->name }}<span class="number">({{ $subcategory->count_products }})</span></a></li>
 										@endforeach
 									</ul>
 								</li>
 							@else
-								<li class="main-nav-list"><a href="?category={{ $category->id }}">{{ $category->name }}<span class="number">({{ $category->count_products }})</span></a></li>
+								<li class="main-nav-list"><a href="?category={{ $category->id }}&{{ http_build_query($old_inputs) }}">{{ $category->name }}<span class="number">({{ $category->count_products }})</span></a></li>
 							@endif
 						@endforeach
 					</ul>
 				</div>
 				<div class="sidebar-filter mt-50">
-					<div class="top-filter-head">Product Filters</div>
+					<div class="top-filter-head">Filtres</div>
 					<div class="common-filter">
-						<div class="head">Brands</div>
+						<div class="head">Contenance</div>
 						<form action="#">
 							<ul>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label for="apple">Apple<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="asus" name="brand"><label for="asus">Asus<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="gionee" name="brand"><label for="gionee">Gionee<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="micromax" name="brand"><label for="micromax">Micromax<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="samsung" name="brand"><label for="samsung">Samsung<span>(19)</span></label></li>
+								<li class="filter-list"><input form="filter-form" class="pixel-radio" type="radio" id="call" name="weight" value=""><label for="call">Tout <span></span></label></li>
+								<li class="filter-list"><input form="filter-form" class="pixel-radio" type="radio" id="c15" name="weight" value="15" {{ $old_inputs['weight'] == 15 ? 'checked' : '' }}><label for="c15">15ml <span></span></label></li>
+								<li class="filter-list"><input form="filter-form" class="pixel-radio" type="radio" id="c30" name="weight" value="30" {{ $old_inputs['weight'] == 30 ? 'checked' : '' }}><label for="c30">30ml <span></span></label></li>
+								<li class="filter-list"><input form="filter-form" class="pixel-radio" type="radio" id="c50" name="weight" value="50" {{ $old_inputs['weight'] == 50 ? 'checked' : '' }}><label for="c50">50ml <span></span></label></li>
+								<li class="filter-list"><input form="filter-form" class="pixel-radio" type="radio" id="c70" name="weight" value="70" {{ $old_inputs['weight'] == 70 ? 'checked' : '' }}><label for="c70">70ml <span></span></label></li>
 							</ul>
 						</form>
 					</div>
 					<div class="common-filter">
-						<div class="head">Color</div>
+						<div class="head">Gamme</div>
 						<form action="#">
 							<ul>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">Black
-										Leather<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">Black
-										with red<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
+								<li class="filter-list"><input form="filter-form" class="pixel-radio" type="radio" id="all" name="luxury" value=""><label for="all">Tout<span></span></label></li>
+								<li class="filter-list"><input form="filter-form" class="pixel-radio" type="radio" id="classic" name="luxury" value="classic" {{ $old_inputs['luxury'] == 'classic' ? 'checked' : '' }}><label for="classic">Classique<span></span></label></li>
+								<li class="filter-list"><input form="filter-form" class="pixel-radio" type="radio" id="luxury" name="luxury" value="luxury" {{ $old_inputs['luxury'] == 'luxury' ? 'checked' : '' }}><label for="luxury">Luxe<span></span></label></li>
+								{{-- <li class="filter-list"><input form="filter-form" class="pixel-radio" type="radio" id="luxury" name="gamme"><label for="luxury">Luxury<span> (29)</span></label></li> --}}
 							</ul>
 						</form>
 					</div>
 					<div class="common-filter">
-						<div class="head">Price</div>
+						<div class="head">Prix</div>
 						<div class="price-range-area">
 							<div id="price-range"></div>
 							<div class="value-wrapper d-flex">
-								<div class="price">Price:</div>
-								<span>$</span>
+								<div class="price">Prix:</div>
 								<div id="lower-value"></div>
-								<div class="to">to</div>
-								<span>$</span>
+								<span>FCFA</span>
+								<br>
+								<div class="to">à</div>
+								<br>
 								<div id="upper-value"></div>
+								<span>FCFA</span>
 							</div>
 						</div>
 					</div>
+					<div class="common-filter">
+						@php
+							$lowerPrice = $old_inputs['lower_price'] ?? 0;
+							$upperPrice = $old_inputs['upper_price'] ?? 100000;
+
+							$lowerPrice = $lowerPrice < 0 ? 0 : $lowerPrice;
+							$upperPrice = $upperPrice < 0 ? 100000 : $upperPrice;
+						@endphp
+						<form action="" method="get" id="filter-form" class="text-center justify-content-center mt-2">
+							<input form="filter-form" type="hidden" name="upper_price" id="upper-input" value="{{ $upperPrice }}">
+							<input form="filter-form" type="hidden" name="lower_price" id="lower-input" value="{{ $lowerPrice }}">
+							<button class="btn .btn-primary" style="background: #fbd600; color: white;">Appliquer</button>
+						</form>
+					</div>
 				</div>
 			</div>
+			<script>
+				var lowerPrice = {{ $lowerPrice }};
+				var upperPrice = {{ $upperPrice }};
+				
+			</script>
 			<div class="col-xl-9 col-lg-8 col-md-7">
 				<!-- Start Filter Bar -->
 					@include('client.components.pagination', ['element' => $products])
 				<!-- End Filter Bar -->
 				<!-- Start Best Seller -->
+				@if (count($products) === 0)
+					<h4 class="m-5 text-center">Aucun produit trouvé</h4>
+					
+				@else	
 				<section class="lattest-product-area pb-40 category-list">
 					<div class="row">
 						<!-- single product -->
 						@foreach ($products as $product)
-						<div class="col-lg-3 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="{{ asset($product->image) }}" alt="">
-								<div class="product-details">
-										<h6>{{$product->name}} ({{$product->code}})</h6>
-									<div class="price">
-										<h6>{{number_format($product->price - $product->reduction, 0)}} FCFA</h6>
-										@if ($product->reduction > 0)
-											<h6 class="l-through">{{number_format($product->price, 0)}} FCFA</h6>
-										@endif
-									</div>
-									<div class="prd-bottom">
-
-										<a href="" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Ajouter au panier</p>
-										</a>
-										{{-- <a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Liste de souhaits</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">Comparer</p>
-										</a> --}}
-										<a href="" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Voir plus</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
+							@include('client.components.home.product', ['product' => $product])
 						@endforeach
 					</div>
 				</section>
+				@endif
 				<!-- End Best Seller -->
 				<!-- Start Filter Bar -->
 					@include('client.components.pagination', ['element' => $products])
@@ -223,8 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
 @endsection
 
 @section('modals')
-
-	<!-- Modal Quick Product View -->
+	{{-- <!-- Modal Quick Product View -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="container relative">
@@ -289,5 +279,5 @@ document.addEventListener("DOMContentLoaded", function() {
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 @endsection

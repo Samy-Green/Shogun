@@ -126,7 +126,7 @@
                     <div class="single-deal fixed-height">
                         <div class="overlay"></div>
                         <img class="img-fluid w-100" src="{{ asset($category->image) }}" alt="{{ $category->name }}">
-                        <a href="" class="img-pop-up" target="_blank">
+                        <a href="{{ route('site.categories', ["category" => $category->id]) }}" >
                             <div class="deal-details">
                                 <h6 class="deal-title">{{ $category->name }}</h6>
                             </div>
@@ -192,7 +192,11 @@
 								</div>
 								<h4>{{$product->name}} ({{$product->code}})</h4>
 								<div class="add-bag d-flex align-items-center justify-content-center">
-									<a class="add-btn" href=""><span class="ti-bag"></span></a>
+									@if (isset($cart[$product->id]))
+										<a class="add-btn" href="{{ route('cart.remove', $product->id) }}"><span class="ti-close"></span></a>
+									@else
+										<a class="add-btn" href="{{ route('cart.add', $product->id) }}"><span class="ti-bag"></span></a>
+									@endif
 									<span class="add-text text-uppercase">Ajouter au panier</span>
 								</div>
 							</div>
@@ -211,7 +215,7 @@
 	<!-- End exclusive deal Area -->
 
 	<!-- Start brand Area -->
-	<section class="brand-area section_gap">
+	{{-- <section class="brand-area section_gap">
 		<div class="container">
 			<div class="row">
 				@for ($i = 1; $i <= 5; $i++)
@@ -221,7 +225,7 @@
 				@endfor
 			</div>
 		</div>
-	</section>
+	</section> --}}
 	<!-- End brand Area -->
 
 	<!-- Start related-product Area -->

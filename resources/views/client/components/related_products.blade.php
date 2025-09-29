@@ -15,9 +15,9 @@
 						@foreach ($lastPromoProducts as $product)	
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img class="img-fluid" style="max-width:60px " src="{{ asset($product->image) }}" alt=""></a>
+								<a href="{{ route('site.product', ["product_id" => $product->id]) }}"><img class="img-fluid" style="max-width:60px " src="{{ asset($product->image) }}" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title" style="">{{$product->name}} ({{$product->code}})</a>
+									<a href="{{ route('site.product', ["product_id" => $product->id]) }}" class="title" style="">{{$product->name}} ({{$product->code}})</a>
 									<div class="price">
 										<h6>{{ number_format($product->price - $product->reduction) }} FCFA</h6>
 										<h6 class="l-through">{{ number_format($product->price) }} FCFA</h6>
@@ -30,7 +30,7 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="ctg-right">
-						<a href="#" target="_blank">
+						<a href="javascript:void(0);">
 							<img class="img-fluid d-block mx-auto" src="{{ asset('client/img/promo/default.jpg') }}" alt="">
 						</a>
 					</div>
