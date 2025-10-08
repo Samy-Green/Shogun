@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FileController extends Controller
 {
@@ -40,17 +41,21 @@ class FileController extends Controller
         ]);
 
         $uploadedFile = $request->file('file');
-        $path = $uploadedFile->store('uploads/files', 'public');
+
+        // Stocker dans le répertoire 'files' sur le disque 'public'
+        $filename = time() . '_' . uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
+        $storedPath = $uploadedFile->storeAs('files', $filename, 'public');
 
         File::create([
-            'name' => $uploadedFile->getClientOriginalName(),
-            'path' => $path,
-            'mime_type' => $uploadedFile->getClientMimeType(),
+            'name' => $request->input('name') ?: $uploadedFile->getClientOriginalName(),
+            'path' => 'storage/' . $storedPath,
+            'mime_type' => $uploadedFile->getMimeType(),
             'size' => $uploadedFile->getSize(),
         ]);
 
         return redirect()->route('admin.files.index')->with('success', 'Fichier ajouté avec succès.');
     }
+
 
     /**
      * Affiche un fichier spécifique.
@@ -75,14 +80,35 @@ class FileController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'file' => 'nullable|file|max:10240', // max 10MB
         ]);
 
-        $file->update([
-            'name' => $request->input('name'),
-        ]);
+        // Mettre à jour le nom
+        $file->name = $request->input('name');
+
+        if ($request->hasFile('file')) {
+            $uploadedFile = $request->file('file');
+
+            // Supprimer l'ancien fichier
+            if (Storage::disk('public')->exists($file->path)) {
+                Storage::disk('public')->delete($file->path);
+            }
+
+            // Générer un nouveau nom de fichier unique
+            $filename = time() . '_' . uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
+            $path = $uploadedFile->storeAs('files', $filename, 'public');
+
+            // Mettre à jour le chemin, type MIME et taille
+            $file->path = 'storage/' . $path;
+            $file->mime_type = $uploadedFile->getMimeType();
+            $file->size = $uploadedFile->getSize();
+        }
+
+        $file->save();
 
         return redirect()->route('admin.files.index')->with('success', 'Fichier mis à jour avec succès.');
     }
+
 
     /**
      * Supprime un fichier.
@@ -90,12 +116,15 @@ class FileController extends Controller
     public function destroy(File $file)
     {
         // Supprimer le fichier physique s’il existe
-        if (Storage::disk('public')->exists($file->path)) {
-            Storage::disk('public')->delete($file->path);
+        $relativePath = Str::replaceFirst('storage/', '', $file->path);
+
+        if (Storage::disk('public')->exists($relativePath)) {
+            Storage::disk('public')->delete($relativePath);
         }
 
         $file->delete();
 
         return redirect()->route('admin.files.index')->with('success', 'Fichier supprimé avec succès.');
     }
+
 }

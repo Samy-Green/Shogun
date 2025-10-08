@@ -17,6 +17,7 @@ class PromoPeriod extends Model
         'start_date',
         'end_date',
         'is_active',
+        'image',
     ];
 
     protected $casts = [

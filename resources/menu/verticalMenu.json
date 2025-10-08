@@ -10,31 +10,13 @@
       "url": "admin/categories",
       "icon": "menu-icon tf-icons ti ti-category",
       "name": "Catégories",
-      "slug": "admin.pages-categories"
+      "slug": "admin.categories"
     },
     {
       "url": "admin/products",
       "icon": "menu-icon tf-icons ti ti-package",
       "name": "Produits",
-      "slug": "admin.pages-products"
-    },
-    {
-      "url": "admin/reductions",
-      "icon": "menu-icon tf-icons ti ti-discount-2",
-      "name": "Promotions",
-      "slug": "admin.pages-reductions"
-    },
-    {
-      "url": "admin/customizations",
-      "icon": "menu-icon tf-icons ti ti-adjustments-horizontal",
-      "name": "Customisations",
-      "slug": "admin.pages-customizations"
-    },
-    {
-      "url": "admin/deals",
-      "icon": "menu-icon tf-icons ti ti-discount",
-      "name": "Deals",
-      "slug": "admin.pages-deals"
+      "slug": "admin.products"
     },
     {
       "url": "admin/files",
@@ -43,31 +25,30 @@
       "slug": "admin.pages-files"
     },
     {
-      "url": "admin/page-2",
-      "icon": "menu-icon tf-icons ti ti-file-description",
-      "name": "Page 2",
-      "slug": "admin.pages-page-2"
+      "url": "admin/reductions",
+      "icon": "menu-icon tf-icons ti ti-discount-2",
+      "name": "Promotions",
+      "slug": "admin.reductions"
     },
     {
-      "url": "admin/pages/misc-error",
-      "name": "Error",
-      "icon": "menu-icon tf-icons ti ti-alert-triangle",
-      "slug": "admin.pages-misc-error",
-      "target": "_blank"
+      "url": "admin/deals",
+      "icon": "menu-icon tf-icons ti ti-discount",
+      "name": "Deals",
+      "slug": "admin.pages-deals"
     },
     {
-      "url": "admin/auth/login-basic",
-      "name": "Login",
-      "icon": "menu-icon tf-icons ti ti-login-2",
-      "slug": "admin.auth-login-basic",
-      "target": "_blank"
-    },
-    {
-      "url": "admin/auth/register-basic",
-      "name": "Register",
-      "icon": "menu-icon tf-icons ti ti-user-plus",
-      "slug": "admin.auth-register-basic",
-      "target": "_blank"
+      "url": "admin/customizations",
+      "icon": "menu-icon tf-icons ti ti-adjustments-horizontal",
+      "name": "Customisations",
+      "slug": "admin.customizations",
+      "submenu": [
+        {
+          "url": "admin/carousels",
+          "icon": "menu-icon tf-icons ti ti-discount-2",
+          "name": "Carousel",
+          "slug": "admin.carousels.index"
+        }
+      ]
     },
     {
       "url": "/",

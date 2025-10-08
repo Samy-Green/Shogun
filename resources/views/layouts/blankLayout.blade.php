@@ -11,6 +11,8 @@ $customizerHidden = ($customizerHidden ?? '');
 
 @extends('layouts/commonMaster' )
 
+@include('_partials/alerts/alert')
+
 @section('layoutContent')
 
 <!-- Content -->

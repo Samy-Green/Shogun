@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\CustomizationController;
+use App\Http\Controllers\admin\CarouselController;
 use App\Http\Controllers\admin\DealController;
 use App\Http\Controllers\admin\FileController;
 use App\Http\Controllers\admin\ProductController;
@@ -15,6 +15,7 @@ use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\pages\CartController;
 use App\Http\Controllers\pages\SiteController;
+use App\Models\Carousel;
 use App\Models\File;
 
 //Route::get('/site', [SiteController::class, 'index'])->name('sites-home');
@@ -56,7 +57,7 @@ Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear')
 
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
     // 🏠 Pages principales
     Route::get('/', [HomePage::class, 'index'])->name('pages-home');
     Route::get('/page-2', [Page2::class, 'index'])->name('pages-page-2');
@@ -73,7 +74,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class)->names('categories');
     Route::resource('products', ProductController::class)->names('products');
     Route::resource('reductions', ReductionController::class)->names('reductions');
-    Route::resource('customizations', CustomizationController::class)->names('customizations');
+    Route::resource('carousels', CarouselController::class)->names('carousels');
     Route::resource('deals', DealController::class)->names('deals');
     Route::resource('files', FileController::class)->names('files');
-})->name('admin.');
+});

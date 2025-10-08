@@ -222,13 +222,18 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="col-lg-6">
 					<div class="s_Product_carousel">
 						<div class="single-prd-item">
-							<img class="img-fluid" src="{{ asset($product->image) }}" alt="">
+							<img class="img-fluid" src="{{ asset($product->image) }}" alt="" style="max-height:500px">
 						</div>
 						@foreach ($product->files as $file)
 							<div class="single-prd-item">
-								<img class="img-fluid" src="{{  asset($file->path) }}" alt="">
+								<img class="img-fluid" src="{{ $file->url }}" alt="" style="max-height:500px">
 							</div>
 						@endforeach
+						@if ($product->files->isEmpty())
+							<div class="single-prd-item">
+								<img class="img-fluid" src="{{ asset($product->image) }}" alt="" style="max-height:500px">
+							</div>
+						@endif
 					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">

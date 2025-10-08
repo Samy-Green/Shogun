@@ -10,6 +10,8 @@ $isFront = true;
 @include('layouts/sections/navbar/navbar-front')
 
 <!-- Sections:Start -->
+@include('_partials/alerts/alert')
+
 @yield('content')
 <!-- / Sections:End -->
 
