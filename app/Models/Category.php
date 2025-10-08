@@ -59,7 +59,7 @@ class Category extends Model
         ->whereIn('category_id', $categoryIds)
         ->distinct('product_id')
         ->count('product_id');
-}
+    }
 
 
     public function getCountProductsAttribute()

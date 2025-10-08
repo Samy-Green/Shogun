@@ -1,7 +1,7 @@
 
 @extends('client/layouts/layoutMaster')
 
-@section('title', 'Panier')
+@section('title', 'Contactez nous')
 
 @section('page-styles')
     		<!-- Place your custom styles here -->
@@ -28,7 +28,7 @@
 			'resources/assets/client/js/nouislider.min.js',
 			'resources/assets/client/js/jquery.magnific-popup.min.js',
 			'resources/assets/client/js/owl.carousel.min.js',
-			'resources/assets/client/js/gmaps.min.js',
+			//'resources/assets/client/js/gmaps.min.js',
 			'resources/assets/client/js/main.js',
 	])
 
@@ -40,101 +40,6 @@
 	<!-- Google Maps API -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 
-    <script>
-        document.getElementById('citySearch').addEventListener('input', function() {
-            const filter = this.value.toLowerCase();
-            const items = document.querySelectorAll('#cityList .city-dropdown-item');
-            
-            // alert(items[0]);
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                item.style.display = text.includes(filter) ? 'block' : 'none';
-            });
-        });
-
-        document.querySelector('#citySearch').addEventListener("blur", function() {
-            const checkedRadio = document.querySelector('input[name="city"]:checked');
-            if (checkedRadio) {
-                this.value = checkedRadio.parentElement.textContent.trim(); // affiche le nom dans l’input
-            }
-        });
-
-
-        document.querySelectorAll('.city-radio').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const city = JSON.parse(this.getAttribute('data-city'));
-                document.getElementById('citySearch').value = city.name;
-                const neighborhoodSelect = document.querySelector('.neighborhood-dropdown');
-                document.querySelectorAll('.exp-li').forEach(li => li.classList.remove('active'));
-                document.querySelector('#neighborhoodSearch').value = '';
-                if (city.delivery !== 'home') {
-                    neighborhoodSelect.style.display = 'none';
-                    document.querySelector('#expedition_delivery').classList.add('active');
-                    document.getElementById('no_delivery').checked = false;
-                    document.querySelector('#expedition_delivery span').innerText = city.cost + ' FCFA';
-                    return;
-                } else {
-                    const neighborhoods = JSON.parse(this.getAttribute('data-neighborhoods'));
-                    console.log('neighborhoods');
-                    
-                    if (!neighborhoods || neighborhoods.length === 0) {
-                        neighborhoodSelect.style.display = 'none';
-                        return;
-                    };
-                    
-                    const neighborhoodList = document.getElementById('neighborhoodList');                
-                    // Clear existing options
-                    neighborhoodList.innerHTML = '';
-
-                    // Populate new options
-                    neighborhoods.forEach(neighborhood => {
-                        const option = `<label class="neighborhood-dropdown-item">
-                            <input type="radio" class="neighborhood-radio" form="cart-form" name="neighborhood" value="${ neighborhood.id }" data-neighborhood='${ JSON.stringify(neighborhood) }'>
-                            ${ neighborhood.name }
-                            </label> `;
-                            neighborhoodList.innerHTML += option;
-                        });
-                    neighborhoodSelect.style.display = 'block';
-
-
-                    document.querySelectorAll('.neighborhood-radio').forEach(radio => {
-                        radio.addEventListener('change', function() {
-                            document.querySelectorAll('.exp-li').forEach(li => li.classList.remove('active'));
-                            document.querySelector('#local_delivery').classList.add('active');
-                            document.getElementById('no_delivery').checked = false;
-                            document.querySelector('#local_delivery span').innerText = city.cost + ' FCFA';
-                            const neighborhood = JSON.parse(this.getAttribute('data-neighborhood'));
-                            document.getElementById('neighborhoodSearch').value = neighborhood.name;
-                        });
-                    });
-                }
-            });
-        });
-
-        document.querySelector('#neighborhoodSearch').addEventListener("blur", function() {
-            const checkedRadio = document.querySelector('input[name="neighborhood"]:checked');
-            if (checkedRadio) {
-                this.value = checkedRadio.parentElement.textContent.trim(); // affiche le nom dans l’input
-            }
-        });
-
-        document.getElementById('no_delivery').addEventListener('change', function() {
-            if (this.checked) {
-                document.querySelectorAll('.exp-li').forEach(li => li.classList.remove('active'));
-                document.querySelector('#on_site_delivery').classList.add('active');
-                document.querySelector('#citySearch').value = '';
-                document.querySelector('#neighborhoodSearch').value = '';
-                document.querySelector('.neighborhood-dropdown').style.display = 'none';
-
-                document.querySelector('input[name="city"]:checked').checked = false;
-            }
-            else{
-                document.querySelector('#on_site_delivery').classList.remove('active');
-            }
-        });
-
-    </script>
-
 @endsection
 
 @section('page-content')
@@ -144,10 +49,10 @@
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Contact Us</h1>
+					<h1>Contactez Nous</h1>
 					<nav class="d-flex align-items-center">
-						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-						<a href="category.html">Contact</a>
+						<a href="{{ route("site.index") }}">Accueil<span class="lnr lnr-arrow-right"></span></a>
+						<a href="#">Contact</a>
 					</nav>
 				</div>
 			</div>
@@ -156,53 +61,93 @@
 	<!-- End Banner Area -->
 
 	<!--================Contact Area =================-->
-	<section class="contact_area section_gap_bottom">
-		<div class="container">
-			<div id="mapBox" class="mapBox" data-lat="40.701083" data-lon="-74.1522848" data-zoom="13" data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
+	<section class="contact_area section_gap_bottom mt-5">
+		<div class="container mt-5">
+			{{-- <div id="mapBox" class="mapBox" data-lat="40.701083" data-lon="-74.1522848" data-zoom="13" data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
 			 data-mlat="40.701083" data-mlon="-74.1522848">
-			</div>
+			</div> --}}
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="contact_info">
 						<div class="info_item">
 							<i class="lnr lnr-home"></i>
-							<h6>California, United States</h6>
-							<p>Santa monica bullevard</p>
+							<h6>Yaoundé, Cameroun</h6>
+							<p>Maetur Nkom - Barrière des pluies</p>
 						</div>
 						<div class="info_item">
 							<i class="lnr lnr-phone-handset"></i>
-							<h6><a href="#">00 (440) 9865 562</a></h6>
-							<p>Mon to Fri 9am to 6 pm</p>
+							<h6><a href="#">(237) 677 924 952</a></h6>
+							<p>Disponible 24/7</p>
 						</div>
 						<div class="info_item">
 							<i class="lnr lnr-envelope"></i>
-							<h6><a href="#">support@colorlib.com</a></h6>
-							<p>Send us your query anytime!</p>
+							<h6><a href="#">shogun4952@outlook.com</a></h6>
+							<p>Envoyez votre requête n'importe quand!</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-9">
-					<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+				<form class="row contact_form" action="{{ route('site.mail.post') }}" method="post" id="contactForm">
+						@csrf
 						<div class="col-md-6">
-							<div class="form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'">
-							</div>
-							<div class="form-group">
-								<input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'">
-							</div>
+								<div class="form-group">
+										<input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" 
+													placeholder="Entrez votre Nom" 
+													onfocus="this.placeholder = ''" 
+													onblur="this.placeholder = 'Entrez votre Nom'"
+													value="{{ old('name') }}" 
+													required>
+										@error('name')
+												<div class="invalid-feedback">
+														{{ $message }}
+												</div>
+										@enderror
+								</div>
+								<div class="form-group">
+										<input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" 
+													placeholder="Entrez votre adresse email" 
+													onfocus="this.placeholder = ''" 
+													onblur="this.placeholder = 'Entrez votre adresse email'"
+													value="{{ old('email') }}" 
+													required>
+										@error('email')
+												<div class="invalid-feedback">
+														{{ $message }}
+												</div>
+										@enderror
+								</div>
+								<div class="form-group">
+										<input type="text" class="form-control @error('subject') is-invalid @enderror" id="subject" name="subject" 
+													placeholder="Entrez le sujet" 
+													onfocus="this.placeholder = ''" 
+													onblur="this.placeholder = 'Entrez le sujet'"
+													value="{{ old('subject') }}" 
+													required>
+										@error('subject')
+												<div class="invalid-feedback">
+														{{ $message }}
+												</div>
+										@enderror
+								</div>
 						</div>
 						<div class="col-md-6">
-							<div class="form-group">
-								<textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"></textarea>
-							</div>
+								<div class="form-group">
+										<textarea class="form-control @error('message') is-invalid @enderror" name="message" id="message" rows="1" 
+															placeholder="Entrez votre message" 
+															onfocus="this.placeholder = ''" 
+															onblur="this.placeholder = 'Entrez votre message'"
+															required>{{ old('message') }}</textarea>
+										@error('message')
+												<div class="invalid-feedback">
+														{{ $message }}
+												</div>
+										@enderror
+								</div>
 						</div>
 						<div class="col-md-12 text-right">
-							<button type="submit" value="submit" class="primary-btn">Send Message</button>
+								<button type="submit" value="submit" class="primary-btn">Envoyer votre Message</button>
 						</div>
-					</form>
+				</form>
 				</div>
 			</div>
 		</div>
@@ -243,4 +188,29 @@
 		</div>
 	</div>
 	<!--================End Contact Success and Error message Area =================-->
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+				// Vérifier les sessions et afficher les modals
+				@if(session('success'))
+						var successModal = new bootstrap.Modal(document.getElementById('success'));
+						successModal.show();
+						
+						// Auto-fermeture après 5 secondes
+						setTimeout(function() {
+								successModal.hide();
+						}, 5000);
+				@endif
+
+				@if(session('error'))
+						var errorModal = new bootstrap.Modal(document.getElementById('error'));
+						errorModal.show();
+						
+						// Auto-fermeture après 5 secondes
+						setTimeout(function() {
+								errorModal.hide();
+						}, 5000);
+				@endif
+		});
+	</script>
 @endsection

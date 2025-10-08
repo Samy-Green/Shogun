@@ -47,7 +47,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('site.elements') }}">Elements</a></li>
               </ul>
             </li> --}}
-            <li class="nav-item"><a class="nav-link" href="{{ route('site.contact') }}">Contact</a></li>
+            <li class="nav-item  {{ request()->routeIs('site.contact') ? 'active' : '' }}"><a class="nav-link" href="{{ route('site.contact') }}">Contact</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item {{ request()->routeIs('site.cart') ? 'active' : '' }}"><a href="{{ route('site.cart') }}" class="cart" title="Voir le panier"><span class="ti-bag"></span></a></li>
@@ -61,8 +61,8 @@
   </div>
   <div class="search_input" id="search_input_box">
     <div class="container">
-      <form class="d-flex justify-content-between">
-        <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+      <form class="d-flex justify-content-between" method="GET" action="{{ route('site.categories') }}">
+        <input type="text" class="form-control" id="search_input" name="search_query" placeholder="Rechercher ici...">
         <button type="submit" class="btn"></button>
         <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
       </form>

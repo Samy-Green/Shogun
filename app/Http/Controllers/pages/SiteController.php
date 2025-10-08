@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\pages;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\PromoPeriod;
 use Illuminate\Http\Request;
-use Termwind\Components\Raw;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class SiteController extends Controller
 {
@@ -78,6 +80,7 @@ class SiteController extends Controller
 			$lower_price = $request->query('lower_price', -1); // valeur par défaut 0
 			$weight = $request->query('weight', ''); // valeur par défaut 0
 			$luxury = $request->query('luxury', ''); // valeur par défaut 0
+			$search_query = $request->query('search_query', ''); // valeur par défaut 0
 
 			$old_inputs = [
 				'upper_price' => $upper_price,
@@ -108,6 +111,11 @@ class SiteController extends Controller
 			if ($luxury) {
 				$query->where('luxury', $luxury === 'luxury' ? true : false);
 			}
+            if ($search_query) {
+                $query->where('name', 'like', '%' . $search_query . '%')
+                ->orWhere('description', 'like', '%' . $search_query . '%')
+                ->orWhere('long_description', 'like', '%' . $search_query . '%');
+            }
 
 			$products = $query->orderBy('created_at', 'desc')->paginate(12);
 
@@ -210,5 +218,52 @@ class SiteController extends Controller
     public function contact()
     {
         return view('client.contact');
+    }
+    public function sendMail(Request $request)
+    {
+        //dd($request->all());
+        // Validation des données
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'subject' => 'required|string|max:255',
+                'message' => 'required|string|min:10',
+            ], [
+                'required' => 'Le champ :attribute est obligatoire.',
+                'string' => 'Le champ :attribute doit être une chaîne de caractères.',
+                'email' => 'Le champ :attribute doit être une adresse email valide.',
+                'max' => 'Le champ :attribute ne doit pas dépasser :max caractères.',
+                'min' => 'Le champ :attribute doit contenir au moins :min caractères.',
+            ], [
+                'name' => 'nom',
+                'email' => 'adresse email',
+                'subject' => 'sujet',
+                'message' => 'message',
+            ]
+        );
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        try {
+            // Envoi de l'email
+            Mail::to(config('mail.admin.address')) // Envoi à l'admin
+                ->send(new ContactMail(
+                    $request->name,
+                    $request->email,
+                    $request->subject,
+                    $request->message
+                ));
+
+            return redirect()->back()
+                ->with('success', 'Votre message a été envoyé avec succès!');
+
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer.')
+                ->withInput();
+        }
     }
 }

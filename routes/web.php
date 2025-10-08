@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\CustomizationController;
+use App\Http\Controllers\admin\DealController;
+use App\Http\Controllers\admin\FileController;
+use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ReductionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\language\LanguageController;
 use App\Http\Controllers\pages\HomePage;
@@ -9,33 +15,35 @@ use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\pages\CartController;
 use App\Http\Controllers\pages\SiteController;
+use App\Models\File;
 
 //Route::get('/site', [SiteController::class, 'index'])->name('sites-home');
 
 // Page d’accueil
-Route::get('/site', [SiteController::class, 'index'])->name('site.index');
+Route::get('/', [SiteController::class, 'index'])->name('site.index');
 
 // Shop
-Route::get('/site/categories', [SiteController::class, 'categories'])->name('site.categories');
-Route::get('/site/category', [SiteController::class, 'category'])->name('site.category');
-Route::get('/site/product/{product_id}', [SiteController::class, 'product'])->name('site.product');
-Route::get('/site/checkout', [SiteController::class, 'checkout'])->name('site.checkout');
-Route::get('/site/cart', [SiteController::class, 'cart'])->name('site.cart');
-Route::get('/site/confirmation', [SiteController::class, 'confirmation'])->name('site.confirmation');
+Route::get('/categories', [SiteController::class, 'categories'])->name('site.categories');
+Route::get('/category', [SiteController::class, 'category'])->name('site.category');
+Route::get('/product/{product_id}', [SiteController::class, 'product'])->name('site.product');
+Route::get('/checkout', [SiteController::class, 'checkout'])->name('site.checkout');
+Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart');
+Route::get('/confirmation', [SiteController::class, 'confirmation'])->name('site.confirmation');
 
 // Blog
-Route::get('/site/blog', [SiteController::class, 'blog'])->name('site.blog');
-Route::get('/site/single-blog', [SiteController::class, 'singleBlog'])->name('site.single-blog');
+Route::get('/blog', [SiteController::class, 'blog'])->name('site.blog');
+Route::get('/single-blog', [SiteController::class, 'singleBlog'])->name('site.single-blog');
 
 // Pages
-Route::get('/site/login', [SiteController::class, 'login'])->name('site.login');
-Route::get('/site/tracking', [SiteController::class, 'tracking'])->name('site.tracking');
-Route::get('/site/elements', [SiteController::class, 'elements'])->name('site.elements');
+Route::get('/login', [SiteController::class, 'login'])->name('site.login');
+Route::get('/tracking', [SiteController::class, 'tracking'])->name('site.tracking');
+Route::get('/elements', [SiteController::class, 'elements'])->name('site.elements');
 
 // Contact
-Route::get('/site/contact', [SiteController::class, 'contact'])->name('site.contact');
+Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
+Route::post('/send-mail', [SiteController::class, 'sendMail'])->name('site.mail.post');
 
-Route::post('/site/send-or-maj', [SiteController::class, 'sendOrMaj'])->name('site.send-or-maj');
+Route::post('/send-or-maj', [SiteController::class, 'sendOrMaj'])->name('site.send-or-maj');
 
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
@@ -48,14 +56,24 @@ Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear')
 
 
 
-// Main Page Route
-Route::get('/', [HomePage::class, 'index'])->name('pages-home');
-Route::get('/page-2', [Page2::class, 'index'])->name('pages-page-2');
+Route::prefix('admin')->group(function () {
+    // 🏠 Pages principales
+    Route::get('/', [HomePage::class, 'index'])->name('pages-home');
+    Route::get('/page-2', [Page2::class, 'index'])->name('pages-page-2');
 
-// locale
-Route::get('/lang/{locale}', [LanguageController::class, 'swap']);
-Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('pages-misc-error');
+    // 🌐 Locale
+    Route::get('/lang/{locale}', [LanguageController::class, 'swap'])->name('lang-swap');
+    Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('pages-misc-error');
 
-// authentication
-Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
-Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
+    // 🔐 Authentification
+    Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
+    Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
+
+    // 📂 Routes CRUD
+    Route::resource('categories', CategoryController::class)->names('categories');
+    Route::resource('products', ProductController::class)->names('products');
+    Route::resource('reductions', ReductionController::class)->names('reductions');
+    Route::resource('customizations', CustomizationController::class)->names('customizations');
+    Route::resource('deals', DealController::class)->names('deals');
+    Route::resource('files', FileController::class)->names('files');
+})->name('admin.');
