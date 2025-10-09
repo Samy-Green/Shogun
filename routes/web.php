@@ -32,13 +32,13 @@ Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart');
 Route::get('/confirmation', [SiteController::class, 'confirmation'])->name('site.confirmation');
 
 // Blog
-Route::get('/blog', [SiteController::class, 'blog'])->name('site.blog');
-Route::get('/single-blog', [SiteController::class, 'singleBlog'])->name('site.single-blog');
+// Route::get('/blog', [SiteController::class, 'blog'])->name('site.blog');
+// Route::get('/single-blog', [SiteController::class, 'singleBlog'])->name('site.single-blog');
 
 // Pages
-Route::get('/login', [SiteController::class, 'login'])->name('site.login');
-Route::get('/tracking', [SiteController::class, 'tracking'])->name('site.tracking');
-Route::get('/elements', [SiteController::class, 'elements'])->name('site.elements');
+// Route::get('/login', [SiteController::class, 'login'])->name('site.login');
+// Route::get('/tracking', [SiteController::class, 'tracking'])->name('site.tracking');
+// Route::get('/elements', [SiteController::class, 'elements'])->name('site.elements');
 
 // Contact
 Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
@@ -56,25 +56,39 @@ Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear')
 
 
 
+// // 🔐 Authentification
+// Route::prefix('admin/auth')->name('admin.auth.')->group(function () {
+//     Route::get('login', [LoginBasic::class, 'index'])->name('login');
+//     Route::get('register', [RegisterBasic::class, 'index'])->name('register');
+// });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    // 🏠 Pages principales
-    Route::get('/', [HomePage::class, 'index'])->name('pages-home');
-    Route::get('/page-2', [Page2::class, 'index'])->name('pages-page-2');
 
-    // 🌐 Locale
-    Route::get('/lang/{locale}', [LanguageController::class, 'swap'])->name('lang-swap');
-    Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('pages-misc-error');
 
-    // 🔐 Authentification
-    Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
-    Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
+// // 🌐 Locale
+// Route::get('/lang/{locale}', [LanguageController::class, 'swap'])->name('lang-swap');
+// Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('misc-error');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+    Route::get('/dashboard', [HomePage::class, 'index'])->name('dashboard');
 
-    // 📂 Routes CRUD
-    Route::resource('categories', CategoryController::class)->names('categories');
-    Route::resource('products', ProductController::class)->names('products');
-    Route::resource('reductions', ReductionController::class)->names('reductions');
-    Route::resource('carousels', CarouselController::class)->names('carousels');
-    Route::resource('deals', DealController::class)->names('deals');
-    Route::resource('files', FileController::class)->names('files');
+    Route::prefix('admin')->name('admin.')->group(function () {
+        // 🏠 Pages principales
+        Route::get('/', [HomePage::class, 'index'])->name('pages-home');
+        Route::get('/page-2', [Page2::class, 'index'])->name('pages-page-2');
+
+        // 📂 Routes CRUD
+        Route::resource('categories', CategoryController::class)->names('categories');
+        Route::resource('products', ProductController::class)->names('products');
+        Route::resource('reductions', ReductionController::class)->names('reductions');
+        Route::resource('carousels', CarouselController::class)->names('carousels');
+        Route::resource('deals', DealController::class)->names('deals');
+        Route::resource('files', FileController::class)->names('files');
+    });
+
 });

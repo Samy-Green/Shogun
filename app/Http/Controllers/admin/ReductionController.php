@@ -10,7 +10,30 @@ class ReductionController extends Controller
 {
     public function index()
     {
-        $products = Product::where('discount', '>', 0)->orWhere("deal", '>', 0)->paginate(10); // Récupérez les produits avec leurs réductions depuis la base de données
-        return view('admin.discounts.index', compact('products'));
+        $query_search = request()->input('search_query', '');
+        $old_search['search_query'] = $query_search;
+
+        $query = Product::with('mainCategory')
+            ->where(function ($q) {
+                $q->where('discount', '>', 0)
+                  ->orWhere('deal', '>', 0);
+            }); // Récupère les produits avec réduction ou deal
+
+        // 🔍 Filtrage par mot-clé
+        if ($query_search) {
+            $query->where(function ($q) use ($query_search) {
+                $q->where('name', 'like', "%{$query_search}%")
+                  ->orWhere('code', 'like', "%{$query_search}%")
+                  ->orWhere('description', 'like', "%{$query_search}%")
+                  ->orWhereHas('categories', function ($q2) use ($query_search) {
+                      $q2->where('name', 'like', "%{$query_search}%")
+                         ->orWhere('code', 'like', "%{$query_search}%");
+                  });
+            });
+        }
+
+        $products = $query->paginate(10);
+
+        return view('admin.discounts.index', compact('products', 'old_search'));
     }
 }
