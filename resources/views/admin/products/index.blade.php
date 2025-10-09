@@ -24,7 +24,16 @@ $configData = Helper::appClasses();
 </div>
 
 <div class="card">
-    <h5 class="card-header">Liste des produits</h5>
+    <div class="d-flex justify-content-between">
+        <h5 class="card-header">Liste des produits</h5>
+        <form action="#" method="get" class="d-flex p-4">
+            <input type="text" name="search_query" class="form-control me-3" placeholder="Rechercher un produit..." value="{{ $old_search['search_query'] }}" />
+            <button class="btn btn-primary waves-effect waves-light">
+                <i class="ti ti-search me-1 ms-3"></i>
+                <span class="align-middle me-4">Rechercher</span>
+            </button>
+        </form>
+    </div>
     <div class="table-responsive text-nowrap">
         <table class="table table-hover align-middle">
             <thead>

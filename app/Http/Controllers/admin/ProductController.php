@@ -16,8 +16,24 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('mainCategory')->paginate(10);
-        return view('admin.products.index', compact('products'));
+        $query_search = request()->input('search_query', '');
+        $query = Product::with('mainCategory');
+
+        $old_search['search_query'] = $query_search;
+
+        if($query_search) {
+            $query->where('name', 'like', "%{$query_search}%")
+            ->orWhere('code', 'like', "%{$query_search}%")
+            ->orWhere('description', 'like', "%{$query_search}%")
+            ->orWhereHas('categories', function($q) use ($query_search) {
+                $q->where('name', 'like', "%{$query_search}%")
+                ->orWhere('code', 'like', "%{$query_search}%");
+            });
+        }
+        
+        $products =  $query->paginate(10);
+
+        return view('admin.products.index', compact('products', 'old_search'));
     }
 
     /**

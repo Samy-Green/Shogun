@@ -14,10 +14,22 @@ class CategoryController extends Controller
     // Liste toutes les catégories
     public function index()
     {
-        // 10 catégories par page
-        $categories = Category::with('parent')->paginate(10);
 
-        return view('admin.categories.index', compact('categories'));
+        $query_search = request()->input('search_query', '');
+
+        $query = Category::with('parent');
+        
+        $old_search['search_query'] = $query_search;
+
+        if($query_search) {
+            $query->where('name', 'like', "%{$query_search}%")
+            ->orWhere('code', 'like', "%{$query_search}%")
+            ->orWhere('description', 'like', "%{$query_search}%");
+        }
+
+        $categories =  $query->paginate(10);
+
+        return view('admin.categories.index', compact('categories', 'old_search'));
     }
 
     // Affiche le formulaire d'édition

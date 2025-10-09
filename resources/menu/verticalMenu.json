@@ -10,37 +10,37 @@
       "url": "admin/categories",
       "icon": "menu-icon tf-icons ti ti-category",
       "name": "Catégories",
-      "slug": "admin.categories"
+      "slug": "admin.categories.index"
     },
     {
       "url": "admin/products",
       "icon": "menu-icon tf-icons ti ti-package",
       "name": "Produits",
-      "slug": "admin.products"
+      "slug": "admin.products.index"
     },
     {
       "url": "admin/files",
       "icon": "menu-icon tf-icons ti ti-files",
       "name": "Fichiers",
-      "slug": "admin.pages-files"
+      "slug": "admin.files.index"
     },
     {
       "url": "admin/reductions",
       "icon": "menu-icon tf-icons ti ti-discount-2",
       "name": "Promotions",
-      "slug": "admin.reductions"
+      "slug": "admin.reductions.index"
     },
     {
       "url": "admin/deals",
       "icon": "menu-icon tf-icons ti ti-discount",
       "name": "Deals",
-      "slug": "admin.pages-deals"
+      "slug": "admin.deals.index"
     },
     {
       "url": "admin/customizations",
       "icon": "menu-icon tf-icons ti ti-adjustments-horizontal",
       "name": "Customisations",
-      "slug": "admin.customizations",
+      "slug": "admin.carousels",
       "submenu": [
         {
           "url": "admin/carousels",

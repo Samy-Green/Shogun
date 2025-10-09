@@ -42,7 +42,7 @@ $configData = Helper::appClasses();
                 <tr>
                     <td>
                         @if($carousel->image)
-                            <img src="{{ asset('storage/' . $carousel->image) }}" alt="Image carousel" class="rounded" width="50" height="50">
+                            <img src="{{ asset( $carousel->image) }}" alt="Image carousel" class="rounded" width="50" height="50">
                         @else
                             <span class="text-muted">Aucune</span>
                         @endif

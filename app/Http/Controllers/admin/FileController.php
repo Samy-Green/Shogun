@@ -15,8 +15,20 @@ class FileController extends Controller
      */
     public function index()
     {
-        $files = File::latest()->paginate(10);
-        return view('admin.files.index', compact('files'));
+        // $files = File::latest()->paginate(10);
+        $query_search = request()->input('search_query', '');
+        $query = File::query();
+        
+        $old_search['search_query'] = $query_search;
+
+        if($query_search) {
+            $query->where('name', 'like', "%{$query_search}%")
+            ->orWhere('mime_type', 'like', "%{$query_search}%")
+            ->orWhere('path', 'like', "%{$query_search}%");
+        }
+        
+        $files =  $query->paginate(10);
+        return view('admin.files.index', compact('files', 'old_search'));
     }
 
     /**
