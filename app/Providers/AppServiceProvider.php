@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Vite;
     use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,7 +35,8 @@ class AppServiceProvider extends ServiceProvider
     });
     Paginator::useBootstrapFive();
 
-     if (User::exists()) {
+    if (Schema::hasTable('users')) {
+      if (User::exists()) {
         // Rediriger les tentatives d'accès GET vers /register
         Route::get('admin/register', function () {
             return redirect()->route('login');
@@ -44,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         Route::post('admin/register', function () {
             abort(404);
         })->middleware('web');
+      }
     }
   }
 }
