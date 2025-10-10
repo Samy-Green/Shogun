@@ -47,18 +47,18 @@
 
             <!-- Instagram -->
             <div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="single-footer-widget">
-								<h6 class="mb-20">Navigation</h6>
-								<ul class="footer-nav">
-										<li><a href="">Accueil</a></li>
-										<li><a href="">À propos</a></li>
-										<li><a href="">Catalogue (produits)</a></li>
-										<li><a href="">Panier</a></li>
-										<li><a href="">Blog</a></li>
-										<li><a href="">Contact</a></li>
-										<li><a href="">FAQ</a></li>
-								</ul>
-							</div>
+                <div class="single-footer-widget">
+                    <h6 class="mb-20">Navigation</h6>
+                    <ul class="footer-nav">
+                        <li><a href="{{ route('site.index') }}">Accueil</a></li>
+                        <li><a href="{{ route('site.about') }}">À propos</a></li>
+                        <li><a href="{{ route('site.products') }}">Catalogue (produits)</a></li>
+                        <li><a href="{{ route('site.cart') }}">Panier</a></li>
+                        {{-- <li><a href="{{ route('site.blog') }}">Blog</a></li> --}}
+                        <li><a href="{{ route('site.contact') }}">Contact</a></li>
+                        <li><a href="{{ route('site.faq') }}">FAQ</a></li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Réseaux sociaux -->

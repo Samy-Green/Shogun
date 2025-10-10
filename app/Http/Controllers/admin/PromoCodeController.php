@@ -49,7 +49,7 @@ class PromoCodeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'nullable|string|min:6|max:10|unique:promo_codes,code',
+            'code' => 'nullable|string|min:6|max:12|unique:promo_codes,code',
             'owner_name' => 'nullable|string|max:255',
             'owner_phone' => 'nullable|string|max:20',
             'discount' => 'nullable|numeric|min:0|max:10000',
@@ -68,7 +68,7 @@ class PromoCodeController extends Controller
             'code' => $code,
             'owner_name' => $request->input('owner_name'),
             'owner_phone' => $request->input('owner_phone'),
-            'discount' => $request->input('discount') ?? 0.8,
+            'discount' => $request->input('discount') ?? 0.08,
         ]);
 
         return redirect()->route('admin.codes.index')
@@ -79,7 +79,7 @@ class PromoCodeController extends Controller
     {
         // 1️⃣ Validation des données
         $validated = $request->validate([
-            'code' => 'nullable|string|max:8|unique:promo_codes,code,' . $promo_code->id,
+            'code' => 'nullable|string|max:12|unique:promo_codes,code,' . $promo_code->id,
             'owner_name' => 'nullable|string|max:100',
             'owner_phone' => 'nullable|string|max:20',
             'discount' => 'nullable|numeric|min:0',

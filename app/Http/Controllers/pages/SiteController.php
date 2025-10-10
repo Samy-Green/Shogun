@@ -151,75 +151,7 @@ class SiteController extends Controller
         return view('client.checkout');
     }
 
-    public function cart()
-    {
-        $products = session()->get('cart', []);
 
-        $cities = \App\Models\City::all();
-
-
-        return view('client.cart', compact('cities', 'products'));
-    }
-
-
-    public function sendWhatsApp()
-    {
-        $cart = session()->get('cart', []);
-        if (empty($cart)) {
-            return back()->with('error', 'Votre panier est vide.');
-        }
-
-        $message = "🛒 Salut, j'aimerais passer une commande :\n\n";
-        $total = 0;
-
-        foreach ($cart as $item) {
-            $lineTotal = $item['price'] * $item['quantity'];
-            $total += $lineTotal;
-
-            $message .= "- {$item['name']} ({$item['quantity']} x {$item['price']} FCFA) = {$lineTotal} FCFA\n";
-        }
-
-        $message .= "\n💰 Total : {$total} FCFA";
-
-        // Formatage de l’URL WhatsApp
-        $phone = "237677924952"; // Numéro au format international (237 = Cameroun)
-        $url = "https://wa.me/{$phone}?text=" . urlencode($message);
-
-        return redirect($url);
-    }
-
-    public function sendOrMaj(Request $request)
-    {
-        // dd($request->all());
-
-        $cart = session()->get('cart', []);
-        foreach ($request->input('products', []) as $productId => $quantity) {
-            if (isset($cart[$productId])) {
-                if ($quantity < 1) {
-                    unset($cart[$productId]);
-                } else {
-                    $cart[$productId]['quantity'] =  (int)$quantity;
-                }
-            }
-        }
-        session()->put('cart', $cart);
-        
-        if ($request->has('send')) {
-            // Valider la commande
-            // Logique de validation de la commande ici
-            return $this->sendWhatsApp();
-        }
-        return redirect()->route('site.cart')->with('success', 'Panier mis à jour avec succès.');
-
-        //return redirect()->back()->with('error', 'Action non reconnue.');
-    }
-
-
-    // Contact
-    public function contact()
-    {
-        return view('client.contact');
-    }
     public function sendMail(Request $request)
     {
         //dd($request->all());
@@ -271,7 +203,7 @@ class SiteController extends Controller
     public function storeEmail(Request $request)
     {
         try {
-                $request->validate([
+            $request->validate([
                 'email' => 'required|email|unique:newsletters,email',
             ], [
                 'email.required' => 'Veuillez entrer une adresse email.',

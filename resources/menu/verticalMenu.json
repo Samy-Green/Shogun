@@ -51,12 +51,6 @@
       ]
     },
     {
-      "url": "admin/newsletters",
-      "icon": "menu-icon tf-icons ti ti-news",
-      "name": "Newsletters",
-      "slug": "admin.newsletters.index"
-    },
-    {
       "url": "admin/promo-codes",
       "icon": "menu-icon tf-icons ti ti-ticket",
       "name": "Codes Promo",
@@ -67,6 +61,18 @@
       "icon": "menu-icon tf-icons ti ti-news",
       "name": "Newsletters",
       "slug": "admin.newsletters.index"
+    },
+    {
+      "url": "admin/cities",
+      "icon": "menu-icon tf-icons ti ti-building-community",
+      "name": "Villes",
+      "slug": "admin.cities.index"
+    },
+    {
+      "url": "admin/neighborhoods",
+      "icon": "menu-icon tf-icons ti ti-map-pin",
+      "name": "Quartiers",
+      "slug": "admin.neighborhoods.index"
     },
     {
       "url": "/",

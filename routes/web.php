@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CarouselController;
+use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\PromoCodeController;
 use App\Http\Controllers\admin\DealController;
 use App\Http\Controllers\admin\FileController;
+use App\Http\Controllers\admin\NeighborhoodController;
 use App\Http\Controllers\admin\NewsletterController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReductionController;
@@ -25,38 +27,24 @@ use App\Models\File;
 // Page d’accueil
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
 
-// Shop
-Route::get('/categories', [SiteController::class, 'categories'])->name('site.categories');
-Route::get('/category', [SiteController::class, 'category'])->name('site.category');
+
+Route::get('/faq', function () {return view('client.faq');})->name('site.faq');
+Route::get('/about', function () {return view('client.about');})->name('site.about');
+Route::get('/contact', function () {return view('client.contact');})->name('site.contact');
+
+Route::get('/products', [SiteController::class, 'categories'])->name('site.products');
 Route::get('/product/{product_id}', [SiteController::class, 'product'])->name('site.product');
-Route::get('/checkout', [SiteController::class, 'checkout'])->name('site.checkout');
-Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart');
-Route::get('/confirmation', [SiteController::class, 'confirmation'])->name('site.confirmation');
 
-// Blog
-// Route::get('/blog', [SiteController::class, 'blog'])->name('site.blog');
-// Route::get('/single-blog', [SiteController::class, 'singleBlog'])->name('site.single-blog');
 
-// Pages
-// Route::get('/login', [SiteController::class, 'login'])->name('site.login');
-// Route::get('/tracking', [SiteController::class, 'tracking'])->name('site.tracking');
-// Route::get('/elements', [SiteController::class, 'elements'])->name('site.elements');
-
-// Contact
-Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
-Route::post('/send-mail', [SiteController::class, 'sendMail'])->name('site.mail.post');
-
-Route::post('/send-or-maj', [SiteController::class, 'sendOrMaj'])->name('site.send-or-maj');
-
+// Shop
+Route::get('/cart', [CartController::class, 'index'])->name('site.cart');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::post('/send-or-maj', [CartController::class, 'sendOrMaj'])->name('site.send-or-maj');
+Route::post('/send-mail', [CartController::class, 'sendMail'])->name('site.mail.post');
 
-Route::get('/faq', function () {return view('client.faq');})->name('faq');
 
-Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
-Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 Route::post('/newsletter/subscribe', [SiteController::class, 'storeEmail'])->name('newsletter.subscribe');
 
@@ -95,6 +83,8 @@ Route::middleware([
         Route::resource('files', FileController::class)->names('files');
 
         Route::resource('promo-codes', PromoCodeController::class)->except(['show'])->names('codes');
+        Route::resource('cities', CityController::class)->except(['show'])->names('cities');
+        Route::resource('neighborhoods', NeighborhoodController::class)->except(['show'])->names('neighborhoods');
         
         Route::get('/newsletters', [NewsletterController::class, 'index'])->name('newsletters.index');
         Route::get('/newsletters/create', [NewsletterController::class, 'create'])->name('newsletters.create');

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('owner_name')->nullable();
             $table->string('owner_phone')->nullable();
-            $table->float('discount')->default(0.8);
+            $table->float('discount')->default(0.08);
             $table->timestamps();
         });
     }

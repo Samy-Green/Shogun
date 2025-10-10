@@ -1,14 +1,14 @@
 <?php
 // Variables
 return [
-  "creatorName" => "Pixinvent",
-  "creatorUrl" => "https://pixinvent.com",
-  "templateName" => "Vuexy",
-  "templateSuffix" => "Bootstrap Admin Template",
-  "templateVersion" => "2.0.0",
+  "creatorName" => "Shogun.cm",
+  "creatorUrl" => "https://shogun.cm",
+  "templateName" => "KMR Chogan",
+  "templateSuffix" => "Vente de produits cosmétiques",
+  "templateVersion" => "1.0.0",
   "templateFree" => false,
-  "templateDescription" => "Start your development with a Dashboard for Bootstrap 5",
-  "templateKeyword" => "dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5",
+  "templateDescription" => "Vente de produits cosmétiques",
+  "templateKeyword" => "Chogan, produits cosmétiques, beauté, soins de la peau, parfums, extraits de parfums",
   "licenseUrl" => "https://themeforest.net/licenses/standard",
   "livePreview" => "https://demos.pixinvent.com/vuexy-html-admin-template/landing/",
   "productPage" => "https://1.envato.market/vuexy_admin",

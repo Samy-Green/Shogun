@@ -221,11 +221,15 @@
         outline: none;
     }
 
+    /* .cupon_text{
+        margin-left: 0;
+    } */
+
 </style>
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
         <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="flex-wrap breadcrumb-banner d-flex align-items-center justify-content-end">
                 <div class="col-first">
                     <h1>Pannier</h1>
                     <nav class="d-flex align-items-center">
@@ -259,7 +263,13 @@
                             @foreach ($products as $product)
                             @php
                                 $productPrice = $product["price"];
-                                $miTotal = $productPrice * $product["quantity"];
+                                
+                                $promoDiscount = 0;
+                                if ($promoCode) {
+                                    $promoDiscount =  $promoCode->discount >1 ? $promoCode->discount : $promoCode->discount * $productPrice;
+                                }
+
+                                $miTotal = ($productPrice - $promoDiscount) * $product["quantity"];
                                 $sumTotal += $miTotal;
                             @endphp
                             <tr>
@@ -269,12 +279,13 @@
                                             <img style="max-width: 60px" src="{{ asset($product["image"]) }}" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <p>{{ $product["name"] }}</p>
+                                            <span style="color: black">{{ $product["name"] }}</span>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>{{ $productPrice }} FCFA</h5>
+                                    <span style="color: black">{{ $productPrice }} FCFA</span>
+                                    <span>{{ $promoDiscount ? 'Réduction : (- ' . $promoDiscount . ')' : '' }}</span> 
                                 </td>
                                 <td>
                                     <div class="product_count">
@@ -292,17 +303,24 @@
                                 </tr>
                             @endforeach
                             <tr class="bottom_button">
-                                <td>
-                                    <button form="cart-form" name="maj" value="maj" type="submit" class="btn gray_btn">Mettre à jour le panier</button>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <div class="cupon_text d-flex align-items-center">
-                                        <input type="text" placeholder="Code promo">
-                                        <button class="btn primary-btn">Appliquer</button>
-                                        <button class="btn gray_btn">Fermer</button>
-                                    </div>
+                                <td colspan="4">
+                                    <div class="flex-wrap d-flex justify-content-between">
+                                        <button form="cart-form" name="maj" value="maj" type="submit" class="mt-2 btn gray_btn">Mettre à jour le panier</button>
+                                    {{-- </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td> --}}
+                                        <div class="flex-wrap cupon_text d-flex align-items-center">
+                                            <input class="mt-2 " type="text" form="cart-form" placeholder="Code promo" id="promo_code" name="promo_code" value="{{ old('promo_code', request('promo_code', '')) }}">
+                                            <button class="mt-2 btn primary-btn" form="cart-form" name="send_code" value="send_code" type="submit">Appliquer</button>
+                                            <button class="mt-2 btn gray_btn" onclick="document.getElementById('promo_code').value='';">ANNULER</button>
+                                        </div>
+                                    </div>                                
+                                    @error("promo_code")
+                                        <div class="" style="min-width: 100px;">
+                                            <span class="text-danger">{{ $message }}</span>
+                                        </div>
+                                    @enderror
                                 </td>
                             </tr>
                             <tr>
@@ -334,7 +352,7 @@
                                             <input type="checkbox" form="cart-form" name="no_delivery" id="no_delivery" value="1" checked>Récupérer sur place ? &nbsp;&nbsp;
                                         </label>
                                         <div class="city-dropdown">
-                                            <input type="text" id="citySearch" placeholder="Rechercher une ville..." class="city-dropdown-input form-control mb-2">
+                                            <input type="text" id="citySearch" placeholder="Rechercher une ville..." class="mb-2 city-dropdown-input form-control">
                                             <div id="cityList" class="city-dropdown-list">
                                                 @foreach($cities as $city)
                                                 <label class="city-dropdown-item">
@@ -345,7 +363,7 @@
                                             </div>
                                         </div>
                                         <div class="neighborhood-dropdown" style="display: none;">
-                                            <input type="text" id="neighborhoodSearch" placeholder="Rechercher un quartier..." class="neighborhood-dropdown-input form-control mb-2">
+                                            <input type="text" id="neighborhoodSearch" placeholder="Rechercher un quartier..." class="mb-2 neighborhood-dropdown-input form-control">
                                             <div id="neighborhoodList" class="neighborhood-dropdown-list">
                                                 {{-- Options de quartier seront ajoutées ici dynamiquement --}}
                                             </div>

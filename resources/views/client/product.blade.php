@@ -201,12 +201,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
-			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="flex-wrap breadcrumb-banner d-flex align-items-center justify-content-end">
 				<div class="col-first">
 					<h1>Détails de produit</h1>
 					<nav class="d-flex align-items-center">
 						<a href="{{ route('site.index') }}">Accueil<span class="lnr lnr-arrow-right"></span></a>
-						<a href="{{ route('site.categories') }}">Boutique<span class="lnr lnr-arrow-right"></span></a>
+						<a href="{{ route('site.products') }}">Boutique<span class="lnr lnr-arrow-right"></span></a>
 						<a href="{{ route('site.product', $product->id) }}">Détails du produit</a>
 					</nav>
 				</div>
@@ -239,29 +239,33 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
 						<h3>{{ $product->name }} ({{ $product->code }})</h3>
-						<div class="price mt-2">
+						<div class="mt-2 price">
 							<h6>{{number_format($product->price - $product->reduction, 0)}} FCFA</h6>
 							@if ($product->reduction > 0)
 								<h6 class="l-through">{{number_format($product->price, 0)}} FCFA</h6>
 							@endif
 						</div>
-						<ul class="list mt-2">
+						<ul class="mt-2 list">
 							<li><a class="active" href="#"><span>Catégorie</span> : {{ $product->mainCategory->name }}</a></li>
 							<li><a href="#"><span>Disponibilité</span> : {{ $product->quantity ? 'En stock' : ($product->available ? 'Sur commande' : 'non disponible') }}</a></li>
 						</ul>
 						<p>{{$product->description}}</p>
 						<div class="product_count">
-							<label for="qty">Quantité :</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+							<label for="quantity">Quantité :</label>
+							<input type="text" form="add-to-cart-form" name="quantity" id="sst" maxlength="12" value="{{ isset($cart[$product->id]) ? $cart[$product->id]['quantity'] : 1 }}" title="Quantity:" class="input-text quantity">
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
 							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
 							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
 						</div>
 						<div class="card_area d-flex align-items-center">
-							<a class="primary-btn" href="#">Ajouter au panier</a>
-							{{-- <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> --}}
+							<form action="{{ route('cart.add', $product->id) }}" method="get" id="add-to-cart-form">
+								@csrf
+								<button type="submit" id="btn-add" class="primary-btn" style="border: none; outline: none;">{{ isset($cart[$product->id]) ? 'Mettre à jour le panier' : 'Ajouter au panier' }}</button>
+							</form>
+							{{-- <a class="primary-btn" href="#">Ajouter au panier</a> --}}
+							{{-- <a class="icon_btn" href="#"><i class="lnr lnr-diamond"></i></a>
+							<a class="icon_btn" href="#"><i class="lnr lnr-heart"></i></a> --}}
 						</div>
 					</div>
 				</div>
@@ -418,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Message"></textarea>
 										</div>
 									</div>
-									<div class="col-md-12 text-right">
+									<div class="text-right col-md-12">
 										<button type="submit" value="submit" class="btn primary-btn">Submit Now</button>
 									</div>
 								</form>
@@ -545,7 +549,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Review" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Review'"></textarea></textarea>
 										</div>
 									</div>
-									<div class="col-md-12 text-right">
+									<div class="text-right col-md-12">
 										<button type="submit" value="submit" class="primary-btn">Submit Now</button>
 									</div>
 								</form>
