@@ -51,6 +51,24 @@
       ]
     },
     {
+      "url": "admin/newsletters",
+      "icon": "menu-icon tf-icons ti ti-news",
+      "name": "Newsletters",
+      "slug": "admin.newsletters.index"
+    },
+    {
+      "url": "admin/promo-codes",
+      "icon": "menu-icon tf-icons ti ti-ticket",
+      "name": "Codes Promo",
+      "slug": "admin.codes.index"
+    },
+    {
+      "url": "admin/newsletters",
+      "icon": "menu-icon tf-icons ti ti-news",
+      "name": "Newsletters",
+      "slug": "admin.newsletters.index"
+    },
+    {
       "url": "/",
       "name": "Site",
       "icon": "menu-icon tf-icons ti ti-world",

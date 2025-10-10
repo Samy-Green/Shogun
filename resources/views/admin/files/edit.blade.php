@@ -29,7 +29,7 @@
 @section('content')
 <div class="d-flex justify-content-between">
   <h4 class="py-3">
-    <span class="text-muted fw-light"><a class="text-muted fw-light" href="/admin">Accueil</a> / <a class="text-muted fw-light" href="{{ route('admin.files.index') }}">Fichiers</a> / <a class="text-muted fw-light" href="{{ route('admin.files.show', $file->id) }}">{{ $file->name }}</a> / </span> Modifier
+    <span class="text-muted fw-light"><a class="text-muted fw-light" href="{{ route('admin.index') }}">Accueil</a> / <a class="text-muted fw-light" href="{{ route('admin.files.index') }}">Fichiers</a> / <a class="text-muted fw-light" href="{{ route('admin.files.show', $file->id) }}">{{ $file->name }}</a> / </span> Modifier
   </h4>
   {{-- <form action="{{ route('admin.files.create') }}" method="get">
     <button class="btn btn-primary waves-effect waves-light" data-repeater-create="">

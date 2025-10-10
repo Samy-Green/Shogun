@@ -56,7 +56,7 @@
 <div class="d-flex justify-content-between">
   <h4 class="py-3">
     <span class="text-muted fw-light">
-      <a class="text-muted fw-light" href="/admin">Accueil</a> /
+      <a class="text-muted fw-light" href="{{ route('admin.index') }}">Accueil</a> /
       <a class="text-muted fw-light" href="{{ route('admin.products.index') }}">Produits</a> /
     </span>
     Nouveau produit

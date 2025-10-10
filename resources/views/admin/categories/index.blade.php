@@ -13,7 +13,7 @@ $configData = Helper::appClasses();
 @section('content')
 <div class="d-flex justify-content-between">
     <h4 class="py-3">
-        <span class="text-muted fw-light"><a class="text-muted fw-light" href="/admin">Accueil</a> / </span> Catégories
+        <span class="text-muted fw-light"><a class="text-muted fw-light" href="{{ route('admin.index') }}">Accueil</a> / </span> Catégories
     </h4>
     <form action="{{ route('admin.categories.create') }}" method="get">
         <button class="btn btn-primary waves-effect waves-light">

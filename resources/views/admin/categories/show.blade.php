@@ -14,7 +14,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h4 class="py-3 mb-0">
     <span class="text-muted fw-light">
-      <a href="/admin" class="text-muted fw-light">Accueil</a> /
+      <a href="{{ route('admin.index') }}" class="text-muted fw-light">Accueil</a> /
       <a href="{{ route('admin.categories.index') }}" class="text-muted fw-light">Catégories</a> /
     </span>
     {{ $category->name }}

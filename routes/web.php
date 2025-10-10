@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CarouselController;
+use App\Http\Controllers\admin\PromoCodeController;
 use App\Http\Controllers\admin\DealController;
 use App\Http\Controllers\admin\FileController;
+use App\Http\Controllers\admin\NewsletterController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReductionController;
 use Illuminate\Support\Facades\Route;
@@ -50,10 +52,13 @@ Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
+Route::get('/faq', function () {return view('client.faq');})->name('faq');
+
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
+Route::post('/newsletter/subscribe', [SiteController::class, 'storeEmail'])->name('newsletter.subscribe');
 
 
 // // 🔐 Authentification
@@ -75,13 +80,12 @@ Route::middleware([
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');
-    Route::get('/dashboard', [HomePage::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [HomePage::class, 'index'])->name('dashboard');
 
     Route::prefix('admin')->name('admin.')->group(function () {
         // 🏠 Pages principales
         Route::get('/', [HomePage::class, 'index'])->name('pages-home');
-        Route::get('/page-2', [Page2::class, 'index'])->name('pages-page-2');
-
+        Route::get('/', [HomePage::class, 'index'])->name('index');
         // 📂 Routes CRUD
         Route::resource('categories', CategoryController::class)->names('categories');
         Route::resource('products', ProductController::class)->names('products');
@@ -89,6 +93,13 @@ Route::middleware([
         Route::resource('carousels', CarouselController::class)->names('carousels');
         Route::resource('deals', DealController::class)->names('deals');
         Route::resource('files', FileController::class)->names('files');
+
+        Route::resource('promo-codes', PromoCodeController::class)->except(['show'])->names('codes');
+        
+        Route::get('/newsletters', [NewsletterController::class, 'index'])->name('newsletters.index');
+        Route::get('/newsletters/create', [NewsletterController::class, 'create'])->name('newsletters.create');
+        Route::post('/newsletters/send', [NewsletterController::class, 'send'])->name('newsletters.send');
+        Route::delete('/newsletters/{newsletter}', [NewsletterController::class, 'destroy'])->name('newsletters.destroy');
     });
 
 });

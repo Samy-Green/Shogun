@@ -5,6 +5,7 @@ namespace App\Http\Controllers\pages;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactMail;
 use App\Models\Category;
+use App\Models\Newsletter;
 use App\Models\Product;
 use App\Models\PromoPeriod;
 use Illuminate\Http\Request;
@@ -265,5 +266,24 @@ class SiteController extends Controller
                 ->with('error', 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer.')
                 ->withInput();
         }
+    }
+
+    public function storeEmail(Request $request)
+    {
+        try {
+                $request->validate([
+                'email' => 'required|email|unique:newsletters,email',
+            ], [
+                'email.required' => 'Veuillez entrer une adresse email.',
+                'email.email' => 'L’adresse email n’est pas valide.',
+                'email.unique' => 'Cet email est déjà abonné à la newsletter.',
+            ]);
+
+            Newsletter::create(['email' => $request->email]);
+            return back()->with('suscribe_success', 'Merci pour votre abonnement à la newsletter !');
+        } catch (\Throwable $th) {
+            return back()->with('suscribe_error', 'Une erreur est survenue lors de votre abonnement à la newsletter.');
+        }
+
     }
 }

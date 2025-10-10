@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h4 class="py-3 mb-0">
-    <span class="text-muted fw-light"><a class="text-muted fw-light" href="/admin">Accueil</a> / </span>
+    <span class="text-muted fw-light"><a class="text-muted fw-light" href="{{ route('admin.index') }}">Accueil</a> / </span>
     <a class="text-muted fw-light" href="{{ route('admin.products.index') }}">Produits</a> / 
     <span class="text-dark">{{ $product->name }}</span>
   </h4>

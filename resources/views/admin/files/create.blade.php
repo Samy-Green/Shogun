@@ -29,7 +29,7 @@
 @section('content')
 <div class="d-flex justify-content-between">
   <h4 class="py-3">
-    <span class="text-muted fw-light"><a class="text-muted fw-light" href="/admin">Accueil</a> / </span> Ajouter un fichier
+    <span class="text-muted fw-light"><a class="text-muted fw-light" href="{{ route('admin.index') }}">Accueil</a> / </span> Ajouter un fichier
   </h4>
 </div>
 

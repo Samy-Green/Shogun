@@ -24,19 +24,20 @@
                 <div class="single-footer-widget">
                     <h6>Newsletter</h6>
                     <p>Recevez nos dernières offres et nouveautés en exclusivité</p>
-                    <div id="mc_embed_signup">
-                        <form target="_blank" novalidate="true" action="#" method="get" class="form-inline">
-                            <div class="d-flex flex-row">
-                                <input class="form-control" name="EMAIL" placeholder="Votre email" 
+                    <div id="mc_embed_signup_">
+                        <form action="{{ route('newsletter.subscribe') }}" method="POST" class="form-inline">
+                            @csrf
+                            <div class="flex-row d-flex">
+                                <input class="form-control" name="email" placeholder="Votre email" 
                                     onfocus="this.placeholder = ''" 
                                     onblur="this.placeholder = 'Votre email'" 
                                     required type="email">
-                                <button class="click-btn btn btn-default">
+                                <button type="submit" class="click-btn btn btn-default">
                                     <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                                 </button>
-                                <div style="position: absolute; left: -5000px;">
+                                {{-- <div style="position: absolute; left: -5000px;">
                                     <input name="hidden-field" tabindex="-1" value="" type="text">
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="info"></div>
                         </form>
@@ -76,8 +77,8 @@
         </div>
 
         <!-- Bas de page -->
-        <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-            <p class="footer-text m-0">
+        <div class="flex-wrap footer-bottom d-flex justify-content-center align-items-center">
+            <p class="m-0 footer-text">
                 &copy;<script>document.write(new Date().getFullYear());</script> 
                 Shogun - Tous droits réservés | Créé par par Boule Luciole
             </p>
