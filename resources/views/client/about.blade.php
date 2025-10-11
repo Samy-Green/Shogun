@@ -88,7 +88,7 @@
 		'resources/assets/client/js/countdown.js',
 		'resources/assets/client/js/jquery.magnific-popup.min.js',
 		'resources/assets/client/js/owl.carousel.min.js',
-		'resources/assets/client/js/gmaps.min.js',
+		//'resources/assets/client/js/gmaps.min.js',
 	  'resources/assets/client/js/vendor/jquery-2.2.4.min.js',
     'resources/assets/client/js/vendor/bootstrap.min.js',
     'resources/assets/client/js/main.js',

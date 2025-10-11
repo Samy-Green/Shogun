@@ -32,17 +32,17 @@
 		'resources/assets/client/js/countdown.js',
 		'resources/assets/client/js/jquery.magnific-popup.min.js',
 		'resources/assets/client/js/owl.carousel.min.js',
-		'resources/assets/client/js/gmaps.min.js',
+		//'resources/assets/client/js/gmaps.min.js',
 	  'resources/assets/client/js/vendor/jquery-2.2.4.min.js',
     'resources/assets/client/js/vendor/bootstrap.min.js',
     'resources/assets/client/js/main.js',
 	])
 
     <!-- Script externe Google Maps (pas dans Vite, donc garder en CDN) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
             integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
             crossorigin="anonymous"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script> --}}
 @endsection
 
 @section(section: 'page-content')
@@ -119,10 +119,10 @@
 	<section class="category-area">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-lg-12 text-center">
+				<div class="text-center col-lg-12">
 					<div class="row">
 						@foreach($categories as $category)
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="mb-4 col-lg-4 col-md-6">
                     <div class="single-deal fixed-height">
                         <div class="overlay"></div>
                         <img class="img-fluid w-100" src="{{ asset($category->image) }}" alt="{{ $category->name }}">
@@ -220,7 +220,7 @@
 			<div class="row">
 				@for ($i = 1; $i <= 5; $i++)
 					<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="{{asset('client/img/brand/'.$i.'.png')}}" alt="">
+					<img class="mx-auto img-fluid d-block" src="{{asset('client/img/brand/'.$i.'.png')}}" alt="">
 					</a>
 				@endfor
 			</div>

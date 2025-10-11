@@ -26,7 +26,7 @@ $configData = Helper::appClasses();
 <div class="card">
     <div class="d-flex justify-content-between">
         <h5 class="card-header">Liste des catégories</h5>
-        <form action="#" method="get" class="d-flex p-4">
+        <form action="#" method="get" class="p-4 d-flex">
             <input type="text" name="search_query" class="form-control me-3" placeholder="Rechercher une catégorie..." value="{{ $old_search['search_query'] }}" />
             <button class="btn btn-primary waves-effect waves-light">
                 <i class="ti ti-search me-1 ms-3"></i>
@@ -38,6 +38,7 @@ $configData = Helper::appClasses();
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th>#ID</th>
                     <th>Nom</th>
                     <th>Code</th>
                     <th>Parent</th>
@@ -49,6 +50,7 @@ $configData = Helper::appClasses();
             <tbody class="table-border-bottom-0">
                 @foreach($categories as $category)
                 <tr>
+                    <th>{{ $category->id }}</th>
                     <td>
                         @if($category->icon)
                             <i class="{{ $category->icon }} {{ $category->color }}"></i>
@@ -64,7 +66,7 @@ $configData = Helper::appClasses();
                     <td>{{ $category->total_products_count }}</td>
                     <td>
                         <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <button type="button" class="p-0 btn dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                 <i class="ti ti-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu">
@@ -90,7 +92,7 @@ $configData = Helper::appClasses();
             </tbody>
         </table>
     </div>
-    <div class="mt-3 p-5">
+    <div class="p-5 mt-3">
         {{ $categories->links() }}
     </div>
 

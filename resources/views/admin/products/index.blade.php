@@ -13,7 +13,7 @@ $configData = Helper::appClasses();
 @section('content')
 <div class="d-flex justify-content-between">
     <h4 class="py-3">
-        <span class="text-muted fw-light"><a class="text-muted fw-light" href="{{ route('admin.index') }}">Accueil</a> / </span> Produits
+        <span class="text-muted fw-light"><a class="text-muted fw-light" href="/admin">Accueil</a> / </span> Produits
     </h4>
     <form action="{{ route('admin.products.create') }}" method="get">
         <button class="btn btn-primary waves-effect waves-light">
@@ -26,7 +26,7 @@ $configData = Helper::appClasses();
 <div class="card">
     <div class="d-flex justify-content-between">
         <h5 class="card-header">Liste des produits</h5>
-        <form action="#" method="get" class="d-flex p-4">
+        <form action="#" method="get" class="p-4 d-flex">
             <input type="text" name="search_query" class="form-control me-3" placeholder="Rechercher un produit..." value="{{ $old_search['search_query'] }}" />
             <button class="btn btn-primary waves-effect waves-light">
                 <i class="ti ti-search me-1 ms-3"></i>
@@ -35,7 +35,7 @@ $configData = Helper::appClasses();
         </form>
     </div>
     <div class="table-responsive text-nowrap">
-        <table class="table table-hover align-middle">
+        <table class="table align-middle table-hover">
             <thead>
                 <tr>
                     <th>Image</th>
@@ -87,7 +87,7 @@ $configData = Helper::appClasses();
                     </td>
                     <td>
                         <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <button type="button" class="p-0 btn dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                 <i class="ti ti-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu">
@@ -112,14 +112,69 @@ $configData = Helper::appClasses();
 
                 @if($products->isEmpty())
                 <tr>
-                    <td colspan="9" class="text-center text-muted py-4">Aucun produit trouvé.</td>
+                    <td colspan="9" class="py-4 text-center text-muted">Aucun produit trouvé.</td>
                 </tr>
                 @endif
             </tbody>
         </table>
     </div>
-    <div class="mt-3 p-5">
+    <div class="p-5 mt-3">
         {{ $products->links() }}
     </div>
+</div>
+
+<div class="mt-5 mb-5 card">
+    <h5 class="card-header">Importer des produits</h5>
+    <form action="{{ route('admin.products.import') }}" method="POST" enctype="multipart/form-data" class="mb-3 card-body">
+        @csrf
+        <div class="gap-2 d-flex align-items-center">
+            <input type="file" name="file" accept=".csv,.txt,.xlsx,.xls" class="w-auto form-control" required>
+            <button type="submit" class="btn btn-primary">Importer un fichier (CSV, XLSX, XLS)</button>
+            <div class="dropdown ms-2">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                    Templates {{-- <i class="ti ti-dots-vertical ms-2"></i>  --}}
+                </button>
+                <div class="dropdown-menu">
+                    
+                    {{-- CSV (Couleur standard, Icône de téléchargement) --}}
+                    <a class="dropdown-item text-primary" 
+                    href="{{ asset('templates/import-products-template.csv') }}" 
+                    download="products_import_template.csv">
+                        <i class="ti ti-file-type-csv me-1"></i> CSV
+                    </a>
+                    
+                    {{-- TXT (Couleur standard, Icône de téléchargement) --}}
+                    <a class="dropdown-item text-secondary" 
+                    href="{{ asset('templates/import-products-template.txt') }}" 
+                    download="products_import_template.txt">
+                        <i class="ti ti-file-text me-1"></i> TXT
+                    </a>
+                    
+                    {{-- XLSX (Couleur verte pour Excel, Icône de téléchargement) --}}
+                    <a class="dropdown-item text-success" 
+                    href="{{ asset('templates/import-products-template.xlsx') }}" 
+                    download="products-import-template.xlsx">
+                        <i class="ti ti-file-type-xls me-1"></i> XLSX
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+    </form>
+    @if (session('import_success'))
+        <div class="mt-3 alert alert-success">
+            {{ session('import_success') }}
+        </div>
+    @endif
+
+    @if (session('import_errors'))
+        <div class="mt-3 alert alert-danger">
+            <ul>
+                @foreach (session('import_errors') as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </div>
 @endsection

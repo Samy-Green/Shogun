@@ -63,7 +63,7 @@
   </h4>
 </div>
 
-<div class="card mb-6">
+<div class="mb-6 card">
     <h5 class="card-header">Créer un produit</h5>
     <form action="{{ route('admin.products.store') }}" method="POST" class="card-body" enctype="multipart/form-data">
         @csrf
@@ -177,7 +177,7 @@
                 <textarea name="description" class="form-control" rows="4">{{ old('description') }}</textarea>
             </div>
 
-            <div class="col-12 mt-3">
+            <div class="mt-3 col-12">
                 <label class="form-label" for="long_description">Description longue</label>
                 <textarea id="long_description" name="long_description">{{ old('long_description') }}</textarea>
             </div>

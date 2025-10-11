@@ -25,17 +25,17 @@
 			'resources/assets/client/js/nouislider.min.js',
 			'resources/assets/client/js/jquery.magnific-popup.min.js',
 			'resources/assets/client/js/owl.carousel.min.js',
-			'resources/assets/client/js/gmaps.min.js',
+			//'resources/assets/client/js/gmaps.min.js',
 			'resources/assets/client/js/main.js',
 	])
 
 	{{-- External scripts (non compilés avec Vite) --}}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
 			integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 			crossorigin="anonymous"></script>
 
 	<!-- Google Maps API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script> --}}
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
-			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="flex-wrap breadcrumb-banner d-flex align-items-center justify-content-end">
 				<div class="col-first">
 					<h1>Page Produits</h1>
 					<nav class="d-flex align-items-center">
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
 							$lowerPrice = $lowerPrice < 0 ? 0 : $lowerPrice;
 							$upperPrice = $upperPrice < 0 ? 100000 : $upperPrice;
 						@endphp
-						<form action="" method="get" id="filter-form" class="text-center justify-content-center mt-2">
+						<form action="" method="get" id="filter-form" class="mt-2 text-center justify-content-center">
 							<input form="filter-form" type="hidden" name="upper_price" id="upper-input" value="{{ $upperPrice }}">
 							<input form="filter-form" type="hidden" name="lower_price" id="lower-input" value="{{ $lowerPrice }}">
 							<button class="btn .btn-primary" style="background: #fbd600; color: white;">Appliquer</button>
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					<h4 class="m-5 text-center">Aucun produit trouvé</h4>
 					
 				@else	
-				<section class="lattest-product-area pb-40 category-list">
+				<section class="pb-40 lattest-product-area category-list">
 					<div class="row">
 						<!-- single product -->
 						@foreach ($products as $product)
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		</div>
 	</div>
 
-	<div class="mt-3 pt-3"></div>
+	<div class="pt-3 mt-3"></div>
 	<!-- Start related-product Area -->
 	@include('client.components.related_products', ['lastPromoProducts' => $lastPromoProducts])
 	<!-- End related-product Area -->
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function() {
 										</div>
 
 									</div>
-									<div class="d-flex mt-20">
+									<div class="mt-20 d-flex">
 										<a href="#" class="view-btn color-2"><span>Add to Cart</span></a>
 										<a href="#" class="like-btn"><span class="lnr lnr-layers"></span></a>
 										<a href="#" class="like-btn"><span class="lnr lnr-heart"></span></a>

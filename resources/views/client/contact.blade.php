@@ -33,12 +33,12 @@
 	])
 
 	{{-- External scripts (non compilés avec Vite) --}}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
 			integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 			crossorigin="anonymous"></script>
 
 	<!-- Google Maps API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script> --}}
 
 @endsection
 
@@ -47,7 +47,7 @@
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
-			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="flex-wrap breadcrumb-banner d-flex align-items-center justify-content-end">
 				<div class="col-first">
 					<h1>Contactez Nous</h1>
 					<nav class="d-flex align-items-center">
@@ -61,7 +61,7 @@
 	<!-- End Banner Area -->
 
 	<!--================Contact Area =================-->
-	<section class="contact_area section_gap_bottom mt-5">
+	<section class="mt-5 contact_area section_gap_bottom">
 		<div class="container mt-5">
 			{{-- <div id="mapBox" class="mapBox" data-lat="40.701083" data-lon="-74.1522848" data-zoom="13" data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
 			 data-mlat="40.701083" data-mlon="-74.1522848">
@@ -144,7 +144,7 @@
 										@enderror
 								</div>
 						</div>
-						<div class="col-md-12 text-right">
+						<div class="text-right col-md-12">
 								<button type="submit" value="submit" class="primary-btn">Envoyer votre Message</button>
 						</div>
 				</form>

@@ -77,6 +77,8 @@ Route::middleware([
         // 📂 Routes CRUD
         Route::resource('categories', CategoryController::class)->names('categories');
         Route::resource('products', ProductController::class)->names('products');
+        Route::post('/products/import', [ProductController::class, 'import'])->name('products.import');
+
         Route::resource('reductions', ReductionController::class)->names('reductions');
         Route::resource('carousels', CarouselController::class)->names('carousels');
         Route::resource('deals', DealController::class)->names('deals');

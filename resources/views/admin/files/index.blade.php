@@ -54,7 +54,7 @@ $configData = Helper::appClasses();
 <div class="card">
   <div class="d-flex justify-content-between">
       <h5 class="card-header">Liste des fichiers</h5>
-      <form action="#" method="get" class="d-flex p-4">
+      <form action="#" method="get" class="p-4 d-flex">
           <input type="text" name="search_query" class="form-control me-3" placeholder="Rechercher un fichier..." value="{{ $old_search['search_query'] }}" />
           <button class="btn btn-primary waves-effect waves-light">
               <i class="ti ti-search me-1 ms-3"></i>
@@ -66,6 +66,7 @@ $configData = Helper::appClasses();
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>#ID</th>
           <th>Name</th>
           <th>Preview</th>
           <th>Type</th>
@@ -77,6 +78,7 @@ $configData = Helper::appClasses();
       <tbody class="table-border-bottom-0">
         @foreach($files as $file)
         <tr>
+          <td>{{ $file->id }}</td>
           <td><i class="{{ $file->icon['icon'] }} {{ $file->icon['color'] }}"></i> <span class="fw-medium">{{ $file->name }}</span></td>
           <td>
             @if(\Illuminate\Support\Str::startsWith($file->mime_type, 'image'))
@@ -90,7 +92,7 @@ $configData = Helper::appClasses();
           <td>{{ $file->created_at->format('d M Y') }}</td>
           <td>
             <div class="dropdown">
-              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+              <button type="button" class="p-0 btn dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                 <i class="ti ti-dots-vertical"></i>
               </button>
               <div class="dropdown-menu">
@@ -125,7 +127,7 @@ $configData = Helper::appClasses();
       </tbody>
     </table>
     </div>
-    <div class="mt-3 p-5">
+    <div class="p-5 mt-3">
         {{ $files->links() }}
     </div>
 </div>

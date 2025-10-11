@@ -1,29 +1,29 @@
 <!-- Footer: Start -->
 <footer class="landing-footer bg-body footer-text">
-  <div class="footer-top position-relative overflow-hidden z-1">
+  <div class="overflow-hidden footer-top position-relative z-1">
     <img src="{{asset('assets/img/front-pages/backgrounds/footer-bg-'.$configData['style'].'.png')}}" alt="footer bg" class="footer-bg banner-bg-img z-n1" data-app-light-img="front-pages/backgrounds/footer-bg-light.png" data-app-dark-img="front-pages/backgrounds/footer-bg-dark.png" />
     <div class="container">
       <div class="row gx-0 gy-6 g-lg-10">
         <div class="col-lg-5">
-          <a href="javascript:;" class="app-brand-link mb-6">
+          <a href="javascript:;" class="mb-6 app-brand-link">
             <span class="app-brand-logo demo">@include('_partials.macros',['height'=>20,'withbg' => "fill: #fff;"])</span>
             <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">{{ config('variables.templateName') }}</span>
           </a>
-          <p class="footer-text footer-logo-description mb-6">
+          <p class="mb-6 footer-text footer-logo-description">
             Most developer friendly & highly customisable Admin Dashboard Template.
           </p>
           <form class="footer-form">
             <label for="footer-email" class="small">Subscribe to newsletter</label>
-            <div class="d-flex mt-1">
+            <div class="mt-1 d-flex">
               <input type="email" class="form-control rounded-0 rounded-start-bottom rounded-start-top" id="footer-email" placeholder="Your email" />
-              <button type="submit" class="btn btn-primary shadow-none rounded-0 rounded-end-bottom rounded-end-top">
+              <button type="submit" class="shadow-none btn btn-primary rounded-0 rounded-end-bottom rounded-end-top">
                 Subscribe
               </button>
             </div>
           </form>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6">
-          <h6 class="footer-title mb-6">Demos</h6>
+          <h6 class="mb-6 footer-title">Demos</h6>
           <ul class="list-unstyled">
             <li class="mb-4">
               <a href="javascript:;" target="_blank" class="footer-link">Vertical Layout</a>
@@ -43,7 +43,7 @@
           </ul>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6">
-          <h6 class="footer-title mb-6">Pages</h6>
+          <h6 class="mb-6 footer-title">Pages</h6>
           <ul class="list-unstyled">
             <li class="mb-4">
               <a href="javascript:;" class="footer-link">Pricing</a>
@@ -63,15 +63,15 @@
           </ul>
         </div>
         <div class="col-lg-3 col-md-4">
-          <h6 class="footer-title mb-6">Download our app</h6>
-          <a href="javascript:void(0);" class="d-block mb-4"><img src="{{asset('assets/img/front-pages/landing-page/apple-icon.png')}}" alt="apple icon" /></a>
+          <h6 class="mb-6 footer-title">Download our app</h6>
+          <a href="javascript:void(0);" class="mb-4 d-block"><img src="{{asset('assets/img/front-pages/landing-page/apple-icon.png')}}" alt="apple icon" /></a>
           <a href="javascript:void(0);" class="d-block"><img src="{{asset('assets/img/front-pages/landing-page/google-play-icon.png')}}" alt="google play icon" /></a>
         </div>
       </div>
     </div>
   </div>
-  <div class="footer-bottom py-3 py-md-5">
-    <div class="container d-flex flex-wrap justify-content-between flex-md-row flex-column text-center text-md-start">
+  <div class="py-3 footer-bottom py-md-5">
+    <div class="container flex-wrap text-center d-flex justify-content-between flex-md-row flex-column text-md-start">
       <div class="mb-2 mb-md-0">
         <span class="footer-bottom-text">©
           <script>
@@ -79,7 +79,7 @@
 
           </script>
         </span>
-        <a href="{{config('variables.creatorUrl')}}" target="_blank" class="fw-medium text-white text-white">{{config('variables.creatorName')}},</a>
+        <a href="{{config('variables.creatorUrl')}}" target="_blank" class="text-white fw-medium">{{config('variables.creatorName')}},</a>
         <span class="footer-bottom-text"> Made with ❤️ for a better web.</span>
       </div>
       <div>

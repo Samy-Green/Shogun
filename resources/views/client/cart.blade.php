@@ -28,17 +28,17 @@
 			'resources/assets/client/js/nouislider.min.js',
 			'resources/assets/client/js/jquery.magnific-popup.min.js',
 			'resources/assets/client/js/owl.carousel.min.js',
-			'resources/assets/client/js/gmaps.min.js',
+			//'resources/assets/client/js/gmaps.min.js',
 			'resources/assets/client/js/main.js',
 	])
 
 	{{-- External scripts (non compilés avec Vite) --}}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
 			integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 			crossorigin="anonymous"></script>
 
 	<!-- Google Maps API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script> --}}
 
     <script>
         document.getElementById('citySearch').addEventListener('input', function() {
